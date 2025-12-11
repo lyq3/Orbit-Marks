@@ -1,0 +1,429 @@
+:root {
+    /* Default Dark Theme (Dev.Start) */
+    --bg-primary: #050b14;
+    --bg-secondary: #0f172a;
+    --bg-sidebar: #020617;
+    --card-bg: #111827;
+    --card-border: #1f2937;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --accent-primary: #3b82f6;
+    /* Blue */
+    --accent-secondary: #f97316;
+    /* Orange */
+    --accent-tertiary: #8b5cf6;
+    /* Purple */
+    --hover-bg: #1e293b;
+    --folder-text: #a7f3d0;
+    --header-gradient-start: #fb923c;
+    --header-gradient-end: #fcd34d;
+    --logo-cursor: #fff;
+    --font-ui: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+    /* Sidebar */
+    --sidebar-width: 200px;
+    --sidebar-bg: #0f1115;
+    --sidebar-border: #2d333b;
+    --sidebar-item-hover: rgba(255, 255, 255, 0.05);
+    --sidebar-item-active: rgba(66, 133, 244, 0.15);
+    --sidebar-text: #8b949e;
+    --sidebar-text-active: #4285f4;
+
+    /* Theme Toggle */
+    --toggle-bg: #1e293b;
+    --toggle-icon: #fcd34d;
+}
+
+/* Light Theme (Google Style) */
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-sidebar: #f1f3f4;
+    --card-bg: #ffffff;
+    --card-border: #e8eaed;
+    --text-primary: #202124;
+    --text-secondary: #5f6368;
+    --accent-primary: #1a73e8;
+    /* Google Blue */
+    --accent-secondary: #ea4335;
+    /* Google Red */
+    --accent-tertiary: #34a853;
+    /* Google Green */
+    --hover-bg: #f1f3f4;
+    --folder-text: #137333;
+    --header-gradient-start: #4285f4;
+    --header-gradient-end: #34a853;
+    /* Multicolor logo vibe */
+    --logo-cursor: #202124;
+    --font-ui: 'Product Sans', 'Roboto', 'Inter', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+    --shadow-card: 0 1px 3px rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+
+    --sidebar-border: #dadce0;
+    --sidebar-item-hover: rgba(0, 0, 0, 0.04);
+    --sidebar-active-bg: #e8f0fe;
+    /* Google Blue Tint */
+    --sidebar-active-text: #1967d2;
+
+    --toggle-bg: #e8eaed;
+    --toggle-icon: #f9ab00;
+    /* Sun color */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 800px;
+    /* Wider for sidebar */
+    height: 550px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    /* In light mode, maybe lower opacity or different blend mode? */
+}
+
+[data-theme="light"] #particle-canvas {
+    opacity: 0.3;
+}
+
+/* Layout */
+.app-layout {
+    display: flex;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Sidebar */
+.app-sidebar {
+    width: var(--sidebar-width);
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--sidebar-border);
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+    transition: background 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 0 16px 16px;
+    border-bottom: 1px solid var(--sidebar-border);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.theme-toggle {
+    background: var(--toggle-bg);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--toggle-icon);
+    transition: all 0.2s;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+.sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 8px;
+}
+
+/* Navigation Item Wrapper (New Multi-level) */
+.nav-item-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    color: var(--sidebar-text);
+    padding: 6px 4px;
+    /* More padding for clickability */
+    margin-bottom: 2px;
+}
+
+.nav-item-wrapper:hover {
+    background: var(--sidebar-item-hover);
+    color: var(--text-primary);
+}
+
+.nav-item-wrapper.active {
+    background: var(--sidebar-item-active);
+    color: var(--sidebar-text-active);
+    font-weight: 500;
+}
+
+/* Toggle Arrow */
+.nav-toggle {
+    width: 24px;
+    /* Larger target */
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    opacity: 0.5;
+    transition: all 0.2s;
+    border-radius: 4px;
+    margin-right: 2px;
+    flex-shrink: 0;
+}
+
+.nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.08);
+    /* Subtle hover for arrow */
+    opacity: 1;
+}
+
+/* Content (Icon + Text) */
+.nav-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    /* Enable truncation */
+    gap: 10px;
+    /* Space between icon and text */
+}
+
+.nav-item-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Children Container */
+.nav-children {
+    display: none;
+    flex-direction: column;
+    margin-left: 12px;
+    /* Indent from arrow center */
+    padding-left: 10px;
+    border-left: 1px solid var(--sidebar-border);
+}
+
+.nav-children.expanded {
+    display: flex;
+}
+
+/* Main Content */
+.app-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    overflow: hidden;
+}
+
+/* Header */
+.main-header {
+    padding: 20px 24px 10px;
+}
+
+.logo-area {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo-text {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--header-gradient-start), var(--header-gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .logo-text {
+    /* Google multi-color inspired gradient for text if we want, or just proper colors */
+    background: linear-gradient(90deg, #4285f4, #ea4335, #fbbc05, #34a853);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-cursor {
+    color: var(--logo-cursor);
+    animation: blink 1s step-end infinite;
+}
+
+.logo-sub {
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+
+/* Search */
+.search-container {
+    width: 100%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    /* Google rounded style */
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    transition: all 0.3s;
+}
+
+[data-theme="light"] .search-container {
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-color: transparent;
+}
+
+#search-input {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    flex: 1;
+    padding: 4px 8px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+#search-input:focus {
+    outline: none;
+}
+
+/* Bookmarks Area */
+.bookmarks-content-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 24px 24px;
+}
+
+.folder-title {
+    font-family: var(--font-mono);
+    color: var(--folder-text);
+    font-size: 1rem;
+    margin-bottom: 16px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.bookmarks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.bookmark-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bookmark-item:hover {
+    transform: translateY(-2px);
+    background: var(--hover-bg);
+    box-shadow: var(--shadow-card);
+}
+
+[data-theme="light"] .bookmark-item {
+    border: 1px solid transparent;
+}
+
+[data-theme="light"] .bookmark-item:hover {
+    background: #fff;
+}
+
+.bookmark-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    /* Circle icons for Google style */
+    padding: 6px;
+    background: var(--bg-secondary);
+    object-fit: contain;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+    /* Take remaining space */
+    min-width: 0;
+    /* Enable text truncation in flex child */
+}
+
+.bookmark-title {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bookmark-sub {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--card-border);
+    border-radius: 4px;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: #dadce0;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
