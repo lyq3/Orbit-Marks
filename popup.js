@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchBookmarks();
     setupSearch();
     setupNavigation();
+    setupSettings();
+    setupSidebarToggle();
 });
 
 let rootNode = null;
@@ -343,6 +345,26 @@ function setupNavigation() {
                     renderFolder(parentNode);
                 }
             }
+        });
+    }
+}
+
+function setupSidebarToggle() {
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('sidebar-collapsed');
+            // Force re-render if needed or save state, but CSS handles visual logic
+        });
+    }
+}
+
+function setupSettings() {
+    const settingsBtn = document.getElementById('settings-btn');
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', () => {
+            console.log('Open Settings Clicked');
+            alert('Settings coming soon!');
         });
     }
 }
