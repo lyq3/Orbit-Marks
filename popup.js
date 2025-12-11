@@ -57,11 +57,11 @@ function updateLogoText(theme) {
     const cursor = document.querySelector('.logo-cursor');
 
     if (theme === 'light') {
-        text.innerHTML = 'DevXP<span class="logo-cursor" style="color:#ea4335">.</span>UI';
-        sub.textContent = '> Optimized for productivity.';
+        text.innerHTML = 'NestLink<span class="logo-cursor" style="color:#ea4335">.</span>';
+        sub.textContent = 'Bookmarks, finally home.';
     } else {
-        text.innerHTML = 'DevXP<span class="logo-cursor">_</span>';
-        sub.textContent = '> System initialized. Ready to launch.';
+        text.innerHTML = 'NestLink<span class="logo-cursor">_</span>';
+        sub.textContent = 'Bookmarks, finally home.';
     }
 }
 

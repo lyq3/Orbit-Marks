@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "DevXP: Ultimate Developer Bookmarks",
-  "version": "1.1",
-  "description": "A developer-focused bookmark manager with terminal aesthetics, dark/light themes, and folder navigation.",
+  "name": "NestLink",
+  "version": "1.2",
+  "description": "Bookmarks, finally home.",
   "permissions": [
     "bookmarks"
   ],
