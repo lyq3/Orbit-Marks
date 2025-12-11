@@ -206,7 +206,6 @@ function renderSidebarNode(node, container, depth) {
 function renderFolder(folderNode) {
     const container = document.getElementById('bookmarks-container');
     const backBtnContainer = document.getElementById('nav-controls');
-    const currentPath = document.getElementById('current-path');
 
     container.innerHTML = '';
 
@@ -214,7 +213,6 @@ function renderFolder(folderNode) {
     if (backBtnContainer) {
         if (navigationStack.length > 0) {
             backBtnContainer.style.display = 'flex';
-            currentPath.textContent = `/${folderNode.title || '...'}`;
         } else {
             backBtnContainer.style.display = 'none';
         }
