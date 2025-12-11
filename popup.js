@@ -172,9 +172,14 @@ function renderSidebarNode(node, container, depth) {
     // Content area (Icon + Title) - Click to Navigate
     const content = document.createElement('div');
     content.className = 'nav-content';
+
+    // First letter for collapsed state
+    const firstChar = (node.title && node.title.length > 0) ? node.title.charAt(0).toUpperCase() : '?';
+
     content.innerHTML = `
         <svg class="nav-item-icon" style="width:16px; height:16px; opacity:0.8;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
-        <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${node.title}</span>
+        <span class="nav-thumbnail">${firstChar}</span>
+        <span class="nav-text" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${node.title}</span>
     `;
 
     wrapper.addEventListener('click', () => {

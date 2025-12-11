@@ -369,11 +369,37 @@ body.sidebar-collapsed {
     --sidebar-width: 64px;
 }
 
+/* Sidebar Thumbnails (Collapsed Mode) */
+.nav-thumbnail {
+    display: none;
+    /* Hidden by default */
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: var(--sidebar-item-active);
+    color: var(--sidebar-active-text);
+    font-size: 12px;
+    font-weight: 700;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
 body.sidebar-collapsed .logo-text,
-body.sidebar-collapsed .nav-item-wrapper span,
+body.sidebar-collapsed .nav-text,
 body.sidebar-collapsed .nav-toggle,
 body.sidebar-collapsed .logo-sub {
+    display: none !important;
+}
+
+body.sidebar-collapsed .nav-item-icon {
     display: none;
+    /* Hide icon in collapsed mode */
+}
+
+body.sidebar-collapsed .nav-thumbnail {
+    display: flex;
+    /* Show text avatar */
 }
 
 body.sidebar-collapsed .sidebar-header {
