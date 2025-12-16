@@ -15,7 +15,7 @@ let navigationStack = [];
 
 const TRANSLATIONS = {
     'en-US': {
-        'brand.subtitle': '> System initialized. Ready to launch.',
+        'brand.subtitle': 'OrbitMarks · Bookmarks in order, free to roam.',
         'search.placeholder': 'Search your bookmarks...',
         'nav.back': 'Back',
         'nav.bookmarks': 'Bookmarks Bar',
@@ -23,17 +23,29 @@ const TRANSLATIONS = {
         'bookmark.type.folder': 'Folder',
         'settings.title': 'Settings',
         'settings.nav.general': 'General',
+        'settings.nav.feedback': 'Feedback',
         'settings.nav.about': 'About',
         'settings.language': 'Language',
         'settings.language.select': 'Select Language',
         'settings.about.version': 'v1.0.0',
-        'settings.about.description': 'Bookmarks, finally home.',
+        'settings.about.description': 'Bookmarks in order, free to roam.',
         'lang.system': 'Follow System',
-        'lang.zhCN': 'Simplified Chinese',
-        'lang.enUS': 'English'
+        'lang.zhCN': '简体中文',
+        'lang.zhTW': '繁體中文',
+        'lang.enUS': 'English',
+        'lang.jaJP': '日本語',
+        'lang.koKR': '한국어',
+        'lang.esES': 'Español',
+        'lang.frFR': 'Français',
+        'lang.deDE': 'Deutsch',
+        'lang.ptBR': 'Português (Brasil)',
+        'lang.ruRU': 'Русский',
+        'settings.feedback.title': 'We value your feedback!',
+        'settings.feedback.subtitle': 'Thank you for using OrbitMarks! Share your thoughts below or email us at <a href="mailto:support@btman.net">support@btman.net</a>.',
+        'settings.feedback.cta': 'Questions or ideas? Drop us a line at support@btman.net.'
     },
     'zh-CN': {
-        'brand.subtitle': '> 系统初始化完成。准备就绪。',
+        'brand.subtitle': 'OrbitMarks · 书签有序，自由随行。',
         'search.placeholder': '搜索书签...',
         'nav.back': '返回',
         'nav.bookmarks': '书签栏',
@@ -41,14 +53,266 @@ const TRANSLATIONS = {
         'bookmark.type.folder': '文件夹',
         'settings.title': '设置',
         'settings.nav.general': '常规',
+        'settings.nav.feedback': '反馈',
         'settings.nav.about': '关于',
         'settings.language': '语言',
         'settings.language.select': '选择语言',
         'settings.about.version': '版本 v1.0.0',
-        'settings.about.description': '书签，从此有家。',
+        'settings.about.description': '书签有序，自由随行。',
         'lang.system': '跟随系统',
         'lang.zhCN': '简体中文',
-        'lang.enUS': 'English'
+        'lang.zhTW': '繁體中文',
+        'lang.enUS': 'English',
+        'lang.jaJP': '日本語',
+        'lang.koKR': '한국어',
+        'lang.esES': 'Español',
+        'lang.frFR': 'Français',
+        'lang.deDE': 'Deutsch',
+        'lang.ptBR': 'Português (Brasil)',
+        'lang.ruRU': 'Русский',
+        'settings.feedback.title': '我们重视你的反馈！',
+        'settings.feedback.subtitle': '感谢使用 OrbitMarks！欢迎在下方分享你的想法，或直接发送邮件至 <a href="mailto:support@btman.net">support@btman.net</a>。',
+        'settings.feedback.cta': '有任何想法，欢迎发送邮件至 support@btman.net。'
+    },
+    'zh-TW': {
+        'brand.subtitle': 'OrbitMarks · 書籤有序，自由隨行。',
+        'search.placeholder': '搜尋書籤...',
+        'nav.back': '返回',
+        'nav.bookmarks': '書籤列',
+        'bookmarks.empty': '空資料夾',
+        'bookmark.type.folder': '資料夾',
+        'settings.title': '設定',
+        'settings.nav.general': '一般',
+        'settings.nav.feedback': '回饋',
+        'settings.nav.about': '關於',
+        'settings.language': '語言',
+        'settings.language.select': '選擇語言',
+        'settings.about.version': '版本 v1.0.0',
+        'settings.about.description': '書籤有序，自由隨行。',
+        'lang.system': '跟隨系統',
+        'lang.zhCN': '简体中文',
+        'lang.zhTW': '繁體中文',
+        'lang.enUS': 'English',
+        'lang.jaJP': '日本語',
+        'lang.koKR': '한국어',
+        'lang.esES': 'Español',
+        'lang.frFR': 'Français',
+        'lang.deDE': 'Deutsch',
+        'lang.ptBR': 'Português (Brasil)',
+        'lang.ruRU': 'Русский',
+        'settings.feedback.title': '我們重視你的回饋！',
+        'settings.feedback.subtitle': '感謝使用 OrbitMarks！歡迎在下方分享想法，或寄信至 <a href="mailto:support@btman.net">support@btman.net</a>。',
+        'settings.feedback.cta': '有任何點子，都可以寫信到 support@btman.net。'
+    },
+    'ja-JP': {
+        'brand.subtitle': 'OrbitMarks · ブックマークを整え、自由に巡航。',
+        'search.placeholder': 'ブックマークを検索...',
+        'nav.back': '戻る',
+        'nav.bookmarks': 'ブックマークバー',
+        'bookmarks.empty': 'フォルダーは空です',
+        'bookmark.type.folder': 'フォルダー',
+        'settings.title': '設定',
+        'settings.nav.general': '一般',
+        'settings.nav.feedback': 'フィードバック',
+        'settings.nav.about': '情報',
+        'settings.language': '言語',
+        'settings.language.select': '言語を選択',
+        'settings.about.version': 'バージョン v1.0.0',
+        'settings.about.description': 'ブックマークを整えて、自由に巡航。',
+        'lang.system': 'システムに従う',
+        'lang.zhCN': '简体中文',
+        'lang.zhTW': '繁體中文',
+        'lang.enUS': 'English',
+        'lang.jaJP': '日本語',
+        'lang.koKR': '한국어',
+        'lang.esES': 'Español',
+        'lang.frFR': 'Français',
+        'lang.deDE': 'Deutsch',
+        'lang.ptBR': 'Português (Brasil)',
+        'lang.ruRU': 'Русский',
+        'settings.feedback.title': 'フィードバックをお待ちしています！',
+        'settings.feedback.subtitle': 'OrbitMarks をご利用いただきありがとうございます。フォーム、または <a href="mailto:support@btman.net">support@btman.net</a> までお気軽にご連絡ください。',
+        'settings.feedback.cta': 'お気軽に support@btman.net へご連絡ください。'
+    },
+    'ko-KR': {
+        'brand.subtitle': 'OrbitMarks · 북마크를 정돈하고 자유롭게 순항하세요.',
+        'search.placeholder': '북마크 검색...',
+        'nav.back': '뒤로',
+        'nav.bookmarks': '북마크 바',
+        'bookmarks.empty': '비어 있는 폴더',
+        'bookmark.type.folder': '폴더',
+        'settings.title': '설정',
+        'settings.nav.general': '일반',
+        'settings.nav.feedback': '피드백',
+        'settings.nav.about': '정보',
+        'settings.language': '언어',
+        'settings.language.select': '언어 선택',
+        'settings.about.version': '버전 v1.0.0',
+        'settings.about.description': '북마크를 정돈하고 자유롭게 순항하세요.',
+        'lang.system': '시스템과 동일',
+        'lang.zhCN': '简体中文',
+        'lang.zhTW': '繁體中文',
+        'lang.enUS': 'English',
+        'lang.jaJP': '日本語',
+        'lang.koKR': '한국어',
+        'lang.esES': 'Español',
+        'lang.frFR': 'Français',
+        'lang.deDE': 'Deutsch',
+        'lang.ptBR': 'Português (Brasil)',
+        'lang.ruRU': 'Русский',
+        'settings.feedback.title': '피드백을 들려주세요!',
+        'settings.feedback.subtitle': 'OrbitMarks를 사용해 주셔서 감사합니다. 아래에 의견을 남기거나 <a href="mailto:support@btman.net">support@btman.net</a> 으로 메일을 보내 주세요.',
+        'settings.feedback.cta': '아이디어가 있다면 support@btman.net 으로 보내 주세요.'
+    },
+    'es-ES': {
+        'brand.subtitle': 'OrbitMarks · Marcadores en orden, libres para moverse.',
+        'search.placeholder': 'Busca en tus marcadores...',
+        'nav.back': 'Volver',
+        'nav.bookmarks': 'Barra de marcadores',
+        'bookmarks.empty': 'Carpeta vacía',
+        'bookmark.type.folder': 'Carpeta',
+        'settings.title': 'Configuración',
+        'settings.nav.general': 'General',
+        'settings.nav.feedback': 'Comentarios',
+        'settings.nav.about': 'Acerca de',
+        'settings.language': 'Idioma',
+        'settings.language.select': 'Seleccionar idioma',
+        'settings.about.version': 'Versión v1.0.0',
+        'settings.about.description': 'Marcadores en orden, libres para moverse.',
+        'lang.system': 'Seguir sistema',
+        'lang.zhCN': '简体中文',
+        'lang.zhTW': '繁體中文',
+        'lang.enUS': 'English',
+        'lang.jaJP': '日本語',
+        'lang.koKR': '한국어',
+        'lang.esES': 'Español',
+        'lang.frFR': 'Français',
+        'lang.deDE': 'Deutsch',
+        'lang.ptBR': 'Português (Brasil)',
+        'lang.ruRU': 'Русский',
+        'settings.feedback.title': '¡Tu opinión es importante!',
+        'settings.feedback.subtitle': 'Gracias por usar OrbitMarks. Comparte tus ideas abajo o escríbenos a <a href="mailto:support@btman.net">support@btman.net</a>.',
+        'settings.feedback.cta': '¿Tienes ideas? Escríbenos a support@btman.net.'
+    },
+    'fr-FR': {
+        'brand.subtitle': 'OrbitMarks · Favoris ordonnés, liberté de navigation.',
+        'search.placeholder': 'Recherchez dans vos favoris...',
+        'nav.back': 'Retour',
+        'nav.bookmarks': 'Barre de favoris',
+        'bookmarks.empty': 'Dossier vide',
+        'bookmark.type.folder': 'Dossier',
+        'settings.title': 'Paramètres',
+        'settings.nav.general': 'Général',
+        'settings.nav.feedback': 'Retour',
+        'settings.nav.about': 'À propos',
+        'settings.language': 'Langue',
+        'settings.language.select': 'Choisir une langue',
+        'settings.about.version': 'Version v1.0.0',
+        'settings.about.description': 'Favoris ordonnés, liberté de navigation.',
+        'lang.system': 'Suivre le système',
+        'lang.zhCN': '简体中文',
+        'lang.zhTW': '繁體中文',
+        'lang.enUS': 'English',
+        'lang.jaJP': '日本語',
+        'lang.koKR': '한국어',
+        'lang.esES': 'Español',
+        'lang.frFR': 'Français',
+        'lang.deDE': 'Deutsch',
+        'lang.ptBR': 'Português (Brasil)',
+        'lang.ruRU': 'Русский',
+        'settings.feedback.title': 'Vos retours comptent !',
+        'settings.feedback.subtitle': 'Merci d’utiliser OrbitMarks. Partagez vos idées ci-dessous ou écrivez-nous à <a href="mailto:support@btman.net">support@btman.net</a>.',
+        'settings.feedback.cta': 'Une idée ? Écrivez-nous à support@btman.net.'
+    },
+    'de-DE': {
+        'brand.subtitle': 'OrbitMarks · Lesezeichen geordnet, jederzeit griffbereit.',
+        'search.placeholder': 'Lesezeichen durchsuchen...',
+        'nav.back': 'Zurück',
+        'nav.bookmarks': 'Lesezeichenleiste',
+        'bookmarks.empty': 'Ordner ist leer',
+        'bookmark.type.folder': 'Ordner',
+        'settings.title': 'Einstellungen',
+        'settings.nav.general': 'Allgemein',
+        'settings.nav.feedback': 'Feedback',
+        'settings.nav.about': 'Info',
+        'settings.language': 'Sprache',
+        'settings.language.select': 'Sprache auswählen',
+        'settings.about.version': 'Version v1.0.0',
+        'settings.about.description': 'Lesezeichen geordnet, jederzeit griffbereit.',
+        'lang.system': 'Systemsprache verwenden',
+        'lang.zhCN': '简体中文',
+        'lang.zhTW': '繁體中文',
+        'lang.enUS': 'English',
+        'lang.jaJP': '日本語',
+        'lang.koKR': '한국어',
+        'lang.esES': 'Español',
+        'lang.frFR': 'Français',
+        'lang.deDE': 'Deutsch',
+        'lang.ptBR': 'Português (Brasil)',
+        'lang.ruRU': 'Русский',
+        'settings.feedback.title': 'Wir freuen uns über Feedback!',
+        'settings.feedback.subtitle': 'Danke, dass du OrbitMarks nutzt. Teile deine Gedanken hier oder schreibe uns an <a href="mailto:support@btman.net">support@btman.net</a>.',
+        'settings.feedback.cta': 'Hast du Ideen? Schreib uns an support@btman.net.'
+    },
+    'pt-BR': {
+        'brand.subtitle': 'OrbitMarks · Favoritos organizados, livres para seguir.',
+        'search.placeholder': 'Pesquise nos seus favoritos...',
+        'nav.back': 'Voltar',
+        'nav.bookmarks': 'Barra de favoritos',
+        'bookmarks.empty': 'Pasta vazia',
+        'bookmark.type.folder': 'Pasta',
+        'settings.title': 'Configurações',
+        'settings.nav.general': 'Geral',
+        'settings.nav.feedback': 'Feedback',
+        'settings.nav.about': 'Sobre',
+        'settings.language': 'Idioma',
+        'settings.language.select': 'Selecione o idioma',
+        'settings.about.version': 'Versão v1.0.0',
+        'settings.about.description': 'Favoritos organizados, livres para seguir.',
+        'lang.system': 'Seguir sistema',
+        'lang.zhCN': '简体中文',
+        'lang.zhTW': '繁體中文',
+        'lang.enUS': 'English',
+        'lang.jaJP': '日本語',
+        'lang.koKR': '한국어',
+        'lang.esES': 'Español',
+        'lang.frFR': 'Français',
+        'lang.deDE': 'Deutsch',
+        'lang.ptBR': 'Português (Brasil)',
+        'lang.ruRU': 'Русский',
+        'settings.feedback.title': 'A sua opinião importa!',
+        'settings.feedback.subtitle': 'Obrigado por usar o OrbitMarks. Compartilhe suas ideias abaixo ou envie um e-mail para <a href="mailto:support@btman.net">support@btman.net</a>.',
+        'settings.feedback.cta': 'Tem alguma ideia? Fale com a gente em support@btman.net.'
+    },
+    'ru-RU': {
+        'brand.subtitle': 'OrbitMarks · Закладки в порядке, свобода передвижения.',
+        'search.placeholder': 'Ищите по закладкам...',
+        'nav.back': 'Назад',
+        'nav.bookmarks': 'Панель закладок',
+        'bookmarks.empty': 'Папка пуста',
+        'bookmark.type.folder': 'Папка',
+        'settings.title': 'Настройки',
+        'settings.nav.general': 'Общие',
+        'settings.nav.feedback': 'Обратная связь',
+        'settings.nav.about': 'О приложении',
+        'settings.language': 'Язык',
+        'settings.language.select': 'Выберите язык',
+        'settings.about.version': 'Версия v1.0.0',
+        'settings.about.description': 'Закладки в порядке, свобода передвижения.',
+        'lang.system': 'Следовать системе',
+        'lang.zhCN': '简体中文',
+        'lang.zhTW': '繁體中文',
+        'lang.enUS': 'English',
+        'lang.jaJP': '日本語',
+        'lang.koKR': '한국어',
+        'lang.esES': 'Español',
+        'lang.frFR': 'Français',
+        'lang.deDE': 'Deutsch',
+        'lang.ptBR': 'Português (Brasil)',
+        'lang.ruRU': 'Русский',
+        'settings.feedback.title': 'Нам важна ваша обратная связь!',
+        'settings.feedback.subtitle': 'Спасибо, что пользуетесь OrbitMarks. Поделитесь мнением ниже или напишите на <a href="mailto:support@btman.net">support@btman.net</a>.',
+        'settings.feedback.cta': 'Есть идеи? Напишите на support@btman.net.'
     }
 };
 
@@ -82,6 +346,13 @@ function updateLanguage(langPref) {
         }
     });
 
+    document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+        const key = el.dataset.i18nHtml;
+        if (dictionary[key]) {
+            el.innerHTML = dictionary[key];
+        }
+    });
+
     document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
         const key = el.dataset.i18nPlaceholder;
         if (dictionary[key]) {
@@ -103,7 +374,10 @@ function updateLanguage(langPref) {
 function resolveLanguage(langPref) {
     if (langPref === 'system') {
         const sysLang = navigator.language || 'en-US';
-        return sysLang.startsWith('zh') ? 'zh-CN' : 'en-US';
+        if (TRANSLATIONS[sysLang]) return sysLang;
+        const prefix = sysLang.split('-')[0];
+        const match = Object.keys(TRANSLATIONS).find(code => code.startsWith(prefix));
+        return match || 'en-US';
     }
     return TRANSLATIONS[langPref] ? langPref : 'en-US';
 }
@@ -158,13 +432,13 @@ function updateLogoText(theme) {
     const sub = document.getElementById('logo-subtitle');
 
     if (theme === 'light') {
-        text.innerHTML = 'NestLink<span class="logo-cursor" style="color:#ea4335">.</span>';
+        text.innerHTML = 'OrbitMarks<span class="logo-cursor" style="color:#fbbf24">.</span>';
     } else {
-        text.innerHTML = 'NestLink<span class="logo-cursor">_</span>';
+        text.innerHTML = 'OrbitMarks<span class="logo-cursor">_</span>';
     }
 
     if (sub) {
-        sub.textContent = t('brand.subtitle', '> System initialized. Ready to launch.');
+        sub.textContent = t('brand.subtitle', 'OrbitMarks · Bookmarks in order, free to roam.');
     }
 }
 
@@ -579,6 +853,7 @@ function setupSettings() {
             });
         });
     }
+
 }
 
 function renderMockData() {

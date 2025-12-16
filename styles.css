@@ -133,6 +133,13 @@ body {
     justify-content: space-between;
 }
 
+.sidebar-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: transparent;
+}
+
 .theme-toggle {
     background: var(--toggle-bg);
     border: none;
@@ -532,22 +539,23 @@ body.sidebar-collapsed #sidebar-toggle svg {
 }
 
 .icon-btn {
-    background: transparent;
+    background: var(--bg-primary);
     border: 1px solid var(--card-border);
-    color: var(--text-secondary);
+    color: var(--text-primary);
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 .icon-btn:hover {
-    color: var(--text-primary);
-    border-color: var(--text-secondary);
+    background: var(--hover-bg);
+    transform: translateY(-1px);
 }
 
 .settings-tab-content {
@@ -573,6 +581,17 @@ body.sidebar-collapsed #sidebar-toggle svg {
     color: var(--text-primary);
 }
 
+.settings-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.feedback-cta {
+    font-size: 0.95rem;
+}
+
 .form-group {
     display: flex;
     align-items: center;
@@ -583,6 +602,59 @@ body.sidebar-collapsed #sidebar-toggle svg {
 .form-group label {
     color: var(--text-secondary);
     font-size: 0.9rem;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.input-field,
+.textarea-field {
+    width: 100%;
+    background: var(--bg-primary);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: var(--text-primary);
+    font-family: inherit;
+    resize: none;
+}
+
+.input-field::placeholder,
+.textarea-field::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.input-field:focus,
+.textarea-field:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+.primary-btn {
+    align-self: flex-start;
+    background: var(--accent-primary);
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
 }
 
 .styled-select {
