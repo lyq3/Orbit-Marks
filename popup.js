@@ -77,11 +77,42 @@ function fetchBookmarks() {
             // Default render: "Bookmarks Bar" (usually id 1) or Root if prefer
             // Let's default to the first useful child, usually "Bookmarks Bar" (id 1)
             const defaultId = rootNode.children && rootNode.children[0] ? rootNode.children[0].id : '0';
-            currentFolderId = defaultId;
+
+            // Memory: Load last active folder
+            const savedId = localStorage.getItem('nestlink_last_folder');
+            let startNode = null;
+
+            if (savedId) {
+                startNode = findNodeById(rootNode, savedId);
+            }
+
+            if (startNode) {
+                currentFolderId = savedId;
+                // Auto-expand parents so this folder is visible
+                expandPathToNode(rootNode, savedId);
+            } else {
+                currentFolderId = defaultId;
+                startNode = findNodeById(rootNode, defaultId) || rootNode;
+            }
 
             renderSidebar();
-            const startNode = findNodeById(rootNode, defaultId) || rootNode;
-            renderFolder(startNode);
+
+            // "Click" simulation to ensure consistent loading behavior
+            setTimeout(() => {
+                const targetId = startNode ? startNode.id : defaultId;
+                const sidebarItem = document.querySelector(`.nav-item-wrapper[data-id="${targetId}"]`);
+
+                if (sidebarItem) {
+                    console.log('Triggering auto-click on:', targetId);
+                    sidebarItem.click();
+                    // Scroll into view if needed
+                    sidebarItem.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                } else {
+                    // Fallback if sidebar item not found (shouldn't happen if expanded correctly)
+                    console.log('Sidebar item not found, manual render:', targetId);
+                    renderFolder(startNode);
+                }
+            }, 50); // Small delay to ensure DOM is ready
         });
     } else {
         renderMockData();
@@ -107,6 +138,19 @@ function processSidebarItems(root) {
     if (root.children) {
         allFolders = root.children;
     }
+}
+
+function expandPathToNode(root, targetId) {
+    if (root.id === targetId) return true;
+    if (root.children) {
+        for (let child of root.children) {
+            if (expandPathToNode(child, targetId)) {
+                expandedFolders.add(root.id);
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 function assignParentIds(node, parentId = null) {
@@ -145,6 +189,7 @@ function renderSidebarNode(node, container, depth) {
     // Wrapper for the item line
     const wrapper = document.createElement('div');
     wrapper.className = 'nav-item-wrapper';
+    wrapper.dataset.id = node.id; // Add ID for easy selection
     if (node.id === currentFolderId) wrapper.classList.add('active');
 
     // Toggle Button (only if has children folders)
@@ -184,6 +229,7 @@ function renderSidebarNode(node, container, depth) {
 
     wrapper.addEventListener('click', () => {
         currentFolderId = node.id;
+        localStorage.setItem('nestlink_last_folder', currentFolderId);
         navigationStack = []; // Reset stack when jumping from sidebar
         renderSidebar();
         renderFolder(node);
@@ -238,11 +284,23 @@ function renderFolder(folderNode) {
         return;
     }
 
+    let renderedCount = 0;
     children.forEach(child => {
-        renderBookmarkItem(child, grid);
+        try {
+            renderBookmarkItem(child, grid);
+            renderedCount++;
+        } catch (err) {
+            console.error(err);
+            const errDiv = document.createElement('div');
+            errDiv.style.color = 'red';
+            errDiv.textContent = 'Item Error: ' + err.message;
+            grid.appendChild(errDiv);
+        }
     });
 
     container.appendChild(grid);
+    // Debug footer to confirm render finish
+    // container.innerHTML += `<div style="font-size:10px; color:#ccc; margin-top:20px;">Rendered ${renderedCount} items.</div>`;
 }
 
 function renderBookmarkItem(node, container) {
