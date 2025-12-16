@@ -480,13 +480,11 @@ function fetchBookmarks() {
                 const sidebarItem = document.querySelector(`.nav-item-wrapper[data-id="${targetId}"]`);
 
                 if (sidebarItem) {
-                    console.log('Triggering auto-click on:', targetId);
                     sidebarItem.click();
                     // Scroll into view if needed
                     sidebarItem.scrollIntoView({ block: 'center', behavior: 'smooth' });
                 } else {
                     // Fallback if sidebar item not found (shouldn't happen if expanded correctly)
-                    console.log('Sidebar item not found, manual render:', targetId);
                     renderFolder(startNode);
                 }
             }, 50); // Small delay to ensure DOM is ready
