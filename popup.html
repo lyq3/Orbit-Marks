@@ -49,7 +49,7 @@
             <header class="main-header">
                 <div class="logo-area">
                     <span class="logo-text">NestLink<span class="logo-cursor">_</span></span>
-                    <p class="logo-sub" id="logo-subtitle">> System initialized. Ready to launch.</p>
+                    <p class="logo-sub" id="logo-subtitle" data-i18n="brand.subtitle">> System initialized. Ready to launch.</p>
                 </div>
 
                 <div class="search-container">
@@ -58,7 +58,7 @@
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
-                    <input type="text" id="search-input" placeholder="Search your bookmarks...">
+                    <input type="text" id="search-input" placeholder="Search your bookmarks..." data-i18n-placeholder="search.placeholder">
                 </div>
             </header>
 
@@ -69,7 +69,7 @@
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
-                    Back
+                    <span data-i18n="nav.back">Back</span>
                 </button>
 
             </div>
@@ -78,6 +78,56 @@
                 <!-- Content injected here -->
             </div>
         </main>
+    </div>
+
+    <div id="settings-overlay" class="settings-overlay">
+        <div class="settings-container">
+            <div class="settings-sidebar">
+                <div class="settings-title">
+                    <h2 data-i18n="settings.title">Settings</h2>
+                </div>
+                <ul class="settings-nav">
+                    <li class="active" data-tab="general" data-i18n="settings.nav.general">General</li>
+                    <li data-tab="about" data-i18n="settings.nav.about">About</li>
+                </ul>
+            </div>
+
+            <div class="settings-body">
+                <div class="settings-close-wrapper">
+                    <button id="close-settings-btn" class="icon-btn" aria-label="Close Settings">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="tab-general" class="settings-tab-content active">
+                    <div class="settings-section">
+                        <h3 data-i18n="settings.language">Language</h3>
+                        <div class="form-group">
+                            <label data-i18n="settings.language.select">Select Language</label>
+                            <select id="language-select" class="styled-select">
+                                <option value="system" data-i18n="lang.system">Follow System</option>
+                                <option value="zh-CN" data-i18n="lang.zhCN">简体中文</option>
+                                <option value="en-US" data-i18n="lang.enUS">English</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-about" class="settings-tab-content">
+                    <div class="settings-section">
+                        <h3>NestLink</h3>
+                        <p class="logo-sub" style="margin-top:8px;" data-i18n="settings.about.version">v1.0.0</p>
+                        <p style="color:var(--text-secondary); font-size:12px; margin-top:12px;"
+                            data-i18n="settings.about.description">
+                            Bookmarks, finally home.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 

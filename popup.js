@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    initLocalization();
     fetchBookmarks();
     setupSearch();
     setupNavigation();
@@ -10,6 +11,107 @@ document.addEventListener('DOMContentLoaded', () => {
 let rootNode = null;
 let currentFolderId = '0';
 let allFolders = []; // To easily populate sidebar
+let navigationStack = [];
+
+const TRANSLATIONS = {
+    'en-US': {
+        'brand.subtitle': '> System initialized. Ready to launch.',
+        'search.placeholder': 'Search your bookmarks...',
+        'nav.back': 'Back',
+        'nav.bookmarks': 'Bookmarks Bar',
+        'bookmarks.empty': 'Empty Directory',
+        'bookmark.type.folder': 'Folder',
+        'settings.title': 'Settings',
+        'settings.nav.general': 'General',
+        'settings.nav.about': 'About',
+        'settings.language': 'Language',
+        'settings.language.select': 'Select Language',
+        'settings.about.version': 'v1.0.0',
+        'settings.about.description': 'Bookmarks, finally home.',
+        'lang.system': 'Follow System',
+        'lang.zhCN': 'Simplified Chinese',
+        'lang.enUS': 'English'
+    },
+    'zh-CN': {
+        'brand.subtitle': '> 系统初始化完成。准备就绪。',
+        'search.placeholder': '搜索书签...',
+        'nav.back': '返回',
+        'nav.bookmarks': '书签栏',
+        'bookmarks.empty': '空文件夹',
+        'bookmark.type.folder': '文件夹',
+        'settings.title': '设置',
+        'settings.nav.general': '常规',
+        'settings.nav.about': '关于',
+        'settings.language': '语言',
+        'settings.language.select': '选择语言',
+        'settings.about.version': '版本 v1.0.0',
+        'settings.about.description': '书签，从此有家。',
+        'lang.system': '跟随系统',
+        'lang.zhCN': '简体中文',
+        'lang.enUS': 'English'
+    }
+};
+
+let currentLang = 'en-US';
+
+function initLocalization() {
+    const select = document.getElementById('language-select');
+    const savedLang = localStorage.getItem('nestlink_language') || 'system';
+
+    if (select) {
+        select.value = savedLang;
+        select.addEventListener('change', (event) => {
+            const newLang = event.target.value;
+            localStorage.setItem('nestlink_language', newLang);
+            updateLanguage(newLang);
+        });
+    }
+
+    updateLanguage(savedLang);
+}
+
+function updateLanguage(langPref) {
+    const resolvedLang = resolveLanguage(langPref);
+    currentLang = resolvedLang;
+    const dictionary = TRANSLATIONS[resolvedLang] || TRANSLATIONS['en-US'];
+
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.dataset.i18n;
+        if (dictionary[key]) {
+            el.textContent = dictionary[key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+        const key = el.dataset.i18nPlaceholder;
+        if (dictionary[key]) {
+            el.placeholder = dictionary[key];
+        }
+    });
+
+    if (allFolders.length > 0) {
+        renderSidebar();
+        if (rootNode) {
+            const active = findNodeById(rootNode, currentFolderId);
+            if (active) {
+                renderFolder(active);
+            }
+        }
+    }
+}
+
+function resolveLanguage(langPref) {
+    if (langPref === 'system') {
+        const sysLang = navigator.language || 'en-US';
+        return sysLang.startsWith('zh') ? 'zh-CN' : 'en-US';
+    }
+    return TRANSLATIONS[langPref] ? langPref : 'en-US';
+}
+
+function t(key, fallback = '') {
+    const dictionary = TRANSLATIONS[currentLang] || TRANSLATIONS['en-US'];
+    return dictionary[key] || fallback || key;
+}
 
 /* --- THEME SYSTEM --- */
 function initTheme() {
@@ -54,14 +156,15 @@ function updateThemeIcon(theme) {
 function updateLogoText(theme) {
     const text = document.querySelector('.logo-area .logo-text');
     const sub = document.getElementById('logo-subtitle');
-    const cursor = document.querySelector('.logo-cursor');
 
     if (theme === 'light') {
         text.innerHTML = 'NestLink<span class="logo-cursor" style="color:#ea4335">.</span>';
-        sub.textContent = 'Bookmarks, finally home.';
     } else {
         text.innerHTML = 'NestLink<span class="logo-cursor">_</span>';
-        sub.textContent = 'Bookmarks, finally home.';
+    }
+
+    if (sub) {
+        sub.textContent = t('brand.subtitle', '> System initialized. Ready to launch.');
     }
 }
 
@@ -185,6 +288,8 @@ function renderSidebarNode(node, container, depth) {
     if (!isFolder) return;
 
     const hasChildrenFolders = node.children && node.children.some(child => !child.url);
+    const rawLabel = node.title || 'Untitled';
+    const displayLabel = (node.id === '1' && rawLabel === 'Bookmarks Bar') ? t('nav.bookmarks', rawLabel) : rawLabel;
 
     // Wrapper for the item line
     const wrapper = document.createElement('div');
@@ -219,12 +324,12 @@ function renderSidebarNode(node, container, depth) {
     content.className = 'nav-content';
 
     // First letter for collapsed state
-    const firstChar = (node.title && node.title.length > 0) ? node.title.charAt(0).toUpperCase() : '?';
+    const firstChar = displayLabel && displayLabel.length > 0 ? displayLabel.charAt(0).toUpperCase() : '?';
 
     content.innerHTML = `
         <svg class="nav-item-icon" style="width:16px; height:16px; opacity:0.8;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
         <span class="nav-thumbnail">${firstChar}</span>
-        <span class="nav-text" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${node.title}</span>
+        <span class="nav-text" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${displayLabel}</span>
     `;
 
     wrapper.addEventListener('click', () => {
@@ -280,7 +385,11 @@ function renderFolder(folderNode) {
     const children = folderNode.children || [];
 
     if (children.length === 0) {
-        container.innerHTML += '<div style="color:var(--text-secondary); padding:20px;">Empty Directory</div>';
+        const emptyState = document.createElement('div');
+        emptyState.style.color = 'var(--text-secondary)';
+        emptyState.style.padding = '20px';
+        emptyState.textContent = t('bookmarks.empty', 'Empty Directory');
+        container.appendChild(emptyState);
         return;
     }
 
@@ -362,10 +471,11 @@ function renderBookmarkItem(node, container) {
 
     const sub = document.createElement('span');
     sub.className = 'bookmark-sub';
+    const folderLabel = t('bookmark.type.folder', 'Folder');
     try {
-        sub.textContent = isFolder ? 'Folder' : new URL(node.url).hostname;
+        sub.textContent = isFolder ? folderLabel : new URL(node.url).hostname;
     } catch (e) {
-        sub.textContent = isFolder ? 'Folder' : 'link';
+        sub.textContent = isFolder ? folderLabel : 'link';
     }
 
     details.appendChild(title);
@@ -422,10 +532,51 @@ function setupSidebarToggle() {
 
 function setupSettings() {
     const settingsBtn = document.getElementById('settings-btn');
-    if (settingsBtn) {
+    const overlay = document.getElementById('settings-overlay');
+    const closeBtn = document.getElementById('close-settings-btn');
+    const navList = document.querySelector('.settings-nav');
+
+    if (settingsBtn && overlay) {
         settingsBtn.addEventListener('click', () => {
-            console.log('Open Settings Clicked');
-            alert('Settings coming soon!');
+            const savedLang = localStorage.getItem('nestlink_language') || 'system';
+            const select = document.getElementById('language-select');
+            if (select) {
+                select.value = savedLang;
+            }
+            overlay.classList.add('open');
+        });
+    }
+
+    if (closeBtn && overlay) {
+        closeBtn.addEventListener('click', () => {
+            overlay.classList.remove('open');
+        });
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', (event) => {
+            if (event.target === overlay) {
+                overlay.classList.remove('open');
+            }
+        });
+    }
+
+    if (navList) {
+        navList.addEventListener('click', (event) => {
+            const tabTrigger = event.target.closest('li');
+            if (!tabTrigger) return;
+
+            navList.querySelectorAll('li').forEach((item) => item.classList.remove('active'));
+            tabTrigger.classList.add('active');
+
+            const targetId = `tab-${tabTrigger.dataset.tab}`;
+            document.querySelectorAll('.settings-tab-content').forEach((content) => {
+                if (content.id === targetId) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
         });
     }
 }
@@ -469,4 +620,3 @@ function renderMockData() {
     renderSidebar();
     renderFolder(rootNode.children[0]);
 }
-
