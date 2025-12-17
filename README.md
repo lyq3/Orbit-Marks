@@ -17,11 +17,11 @@ OrbitMarks is a Chrome bookmarks side panel that blends soft Material cards with
   <tr>
     <td align="center">
       <strong>Dark popup</strong><br>
-      <img src="docs/screenshots/popup-dark.png" alt="OrbitMarks dark popup" width="320">
+      <img src="docs/screenshots/panel-dark-640x400.png" alt="OrbitMarks dark popup" width="320">
     </td>
     <td align="center">
       <strong>Light popup</strong><br>
-      <img src="docs/screenshots/popup-light.png" alt="OrbitMarks light popup" width="320">
+      <img src="docs/screenshots/panel-light-640x400.png" alt="OrbitMarks light popup" width="320">
     </td>
   </tr>
 </table>
