@@ -1,1 +1,52 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# Node / npm / pnpm outputs
+node_modules/
+.npm/
+.pnpm-debug.log*
+yarn.lock
+package-lock.json
+
+# Logs
+*.log
+logs/
+*.pid
+*.seed
+
+# Build outputs
+dist/
+build/
+coverage/
+.nyc_output/
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+
+# VS Code / Cursor / JetBrains / AI IDEs
 .vscode/
+.history/
+.idea/
+.fleet/
+.cursor/
+.sourcery/
+.codeai/
+/.metals/
+/.bloop/
+
+# Misc tooling
+.DS_Store?
+Thumbs.db
+*.swp
+*~
+*.orig
+
+# Generated archives
+*.zip
+*.tar
+*.tgz
