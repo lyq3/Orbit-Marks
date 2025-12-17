@@ -1,58 +1,150 @@
 # OrbitMarks
 
-OrbitMarks is a Chrome bookmarks side panel that blends soft Material cards with terminal-inspired typography. It turns your messy collection of saved links into a curated launchpad with live search, nested folders, and multilingual onboarding.
+<p align="center">
+  <img src="icons/icon128.png" alt="OrbitMarks Logo" width="80">
+</p>
 
-## ✨ Key Features
+<p align="center">
+  <strong>A modern Chrome extension for managing bookmarks with style.</strong>
+</p>
 
-- **Unified command board** – Pin OrbitMarks next to the toolbar to reveal a distraction-free canvas for your most important bookmarks.
-- **Live, folder-aware search** – Type to instantly filter the current folder without leaving the keyboard or losing context.
-- **Nested tree navigation** – Expand/collapse folders in the sidebar, remember the last opened section, and dive into deep bookmark stacks with one click.
-- **International-ready copy** – Ship to the Chrome Web Store with English copy plus 10 additional languages and a “follow system” option.
-- **One-tap theming** – Switch between light and dark palettes; icons, gradients, and particles all adapt automatically.
-- **Built-in feedback lane** – A lightweight CTA keeps the support email one click away so early adopters can reach out.
+<p align="center">
+  <img src="https://img.shields.io/badge/Manifest-V3-blue" alt="Manifest V3">
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
+  <img src="https://img.shields.io/badge/Version-1.2.1-orange" alt="Version">
+</p>
 
-## 📸 Product Preview
+---
+
+OrbitMarks transforms your messy bookmark collection into a beautifully organized launchpad. Built with Manifest V3, it features a clean Material-inspired design with terminal typography, live search, nested folder navigation, and full multilingual support.
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🔍 **Live Search** | Instantly filter bookmarks by title or URL within the current folder |
+| 📁 **Nested Navigation** | Expand/collapse folders in sidebar with persistent state memory |
+| 🌗 **Theme Toggle** | One-click switch between dark and light themes |
+| 🌐 **11 Languages** | Full i18n support with "Follow System" option |
+| ⚡ **Lightweight** | Only requires `bookmarks` permission, no background scripts |
+| ✨ **Particle Effects** | Subtle animated background with auto-pause when hidden |
+
+## 📸 Screenshots
 
 <table>
   <tr>
     <td align="center">
-      <strong>Dark popup</strong><br>
-      <img src="docs/screenshots/panel-dark-640x400.png" alt="OrbitMarks dark popup" width="320">
+      <strong>Dark Theme</strong><br>
+      <img src="docs/screenshots/panel-dark-640x400.png" alt="Dark Theme" width="380">
     </td>
     <td align="center">
-      <strong>Light popup</strong><br>
-      <img src="docs/screenshots/panel-light-640x400.png" alt="OrbitMarks light popup" width="320">
+      <strong>Light Theme</strong><br>
+      <img src="docs/screenshots/panel-light-640x400.png" alt="Light Theme" width="380">
     </td>
   </tr>
 </table>
 
 ## 🚀 Installation
 
-1. Go to `chrome://extensions` and enable **Developer mode** in the top-right corner.
-2. Click **Load unpacked** and choose this repository folder (the one containing `manifest.json`).
-3. Pin the OrbitMarks icon so the popup is always available from the toolbar.
+### From Chrome Web Store
+> Coming soon...
 
-> Need branding tweaks? Replace the PNGs in `icons/`. Need new languages? Extend `TRANSLATIONS` inside `popup.js`.
+### Manual Installation (Developer Mode)
+
+1. Clone or download this repository:
+   ```bash
+   git clone https://github.com/lyq3/TAB-EXT.git
+   cd TAB-EXT
+   ```
+
+2. Open Chrome and navigate to `chrome://extensions`
+
+3. Enable **Developer mode** (toggle in top-right corner)
+
+4. Click **Load unpacked** and select the repository folder
+
+5. Pin the OrbitMarks icon to your toolbar for quick access
+
+## 📁 Project Structure
+
+```
+OrbitMarks/
+├── manifest.json      # Extension manifest (MV3)
+├── popup.html         # Main popup UI
+├── popup.js           # Core logic & i18n translations
+├── styles.css         # Theme variables & styling
+├── particles.js       # Background particle animation
+├── icons/             # Extension icons (16/48/128px)
+└── docs/screenshots/  # Store listing assets
+```
 
 ## 🛠 Development
 
-```bash
-# Install dependencies if you plan to extend the toolchain
-pnpm install
+This extension uses vanilla JavaScript with no build step required.
 
-# Load the extension in Chrome for live debugging
-pnpm dev
+```bash
+# Clone the repository
+git clone https://github.com/lyq3/TAB-EXT.git
+
+# Load in Chrome as unpacked extension
+# Make changes and reload extension to see updates
 ```
 
-Key files:
-- `popup.html`, `styles.css`, `popup.js` – UI layout, theming, and bookmark rendering logic.
-- `manifest.json` – Extension declaration (only uses the `bookmarks` permission).
-- `icons/` – Multi-size OrbitMarks logos for Chrome.
-- `docs/screenshots/` – Assets used on the Chrome Web Store listing and README.
+### Customization
+
+- **Icons**: Replace PNGs in `icons/` directory
+- **Languages**: Add translations to `TRANSLATIONS` object in `popup.js`
+- **Themes**: Modify CSS variables in `:root` and `[data-theme="light"]` in `styles.css`
+
+## 🧪 Tech Stack
+
+- **Manifest Version**: 3 (latest Chrome extension standard)
+- **Permissions**: `bookmarks` only
+- **External Resources**:
+  - Google Fonts (Inter, JetBrains Mono, Roboto)
+  - Google Favicon Service (for bookmark icons)
+
+## 🌐 Supported Languages
+
+| Language | Code |
+|----------|------|
+| English | `en-US` |
+| 简体中文 | `zh-CN` |
+| 繁體中文 | `zh-TW` |
+| 日本語 | `ja-JP` |
+| 한국어 | `ko-KR` |
+| Español | `es-ES` |
+| Français | `fr-FR` |
+| Deutsch | `de-DE` |
+| Português | `pt-BR` |
+| Русский | `ru-RU` |
+
+## 📝 Changelog
+
+### v1.2.1
+- Fixed LocalStorage key naming inconsistency
+- Fixed navigation stack double-push issue
+- Added URL search support
+- Added Page Visibility API for animation optimization
+- Improved CSS compatibility and font loading
+
+### v1.2
+- Initial public release
+- Core bookmark management features
+- Multi-language support
+- Dark/Light theme toggle
 
 ## 💬 Support
 
-Questions or feature ideas? Email [support@btman.net](mailto:support@btman.net) and we’ll get back to you soon.
+Questions, bugs, or feature requests? 
+
+- 📧 Email: [support@btman.net](mailto:support@btman.net)
+- 🐛 Issues: [GitHub Issues](https://github.com/lyq3/TAB-EXT/issues)
+
+## 📄 License
+
+MIT License - feel free to use and modify for your own projects.
 
 ---
-Made with ❤️ for an organized browsing orbit.
+
+<p align="center">Made with ❤️ for an organized browsing experience</p>
