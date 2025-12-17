@@ -32,7 +32,7 @@ class Particle {
         // Wrap around edges
         if (this.x > canvas.width) this.x = 0;
         else if (this.x < 0) this.x = canvas.width;
-        
+
         if (this.y > canvas.height) this.y = 0;
         else if (this.y < 0) this.y = canvas.height;
     }
@@ -55,7 +55,7 @@ function init() {
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     // Connect particles
     connect();
 
@@ -63,7 +63,7 @@ function animate() {
         particlesArray[i].update();
         particlesArray[i].draw();
     }
-    requestAnimationFrame(animate);
+    animationFrameId = requestAnimationFrame(animate);
 }
 
 // Draw lines between close particles
@@ -71,13 +71,13 @@ function connect() {
     let opacityValue = 1;
     for (let a = 0; a < particlesArray.length; a++) {
         for (let b = a; b < particlesArray.length; b++) {
-            let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
-                           ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-            
-            if (distance < (canvas.width/7) * (canvas.height/7)) {
-                opacityValue = 1 - (distance/10000);
+            let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+
+            if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                opacityValue = 1 - (distance / 10000);
                 // Dynamic line color
-                ctx.strokeStyle = 'rgba(148, 163, 184,' + opacityValue * 0.2 + ')'; 
+                ctx.strokeStyle = 'rgba(148, 163, 184,' + opacityValue * 0.2 + ')';
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -88,5 +88,34 @@ function connect() {
     }
 }
 
+// Animation control with Page Visibility API
+let animationFrameId = null;
+let isAnimating = false;
+
+function startAnimation() {
+    if (!isAnimating) {
+        isAnimating = true;
+        animate();
+    }
+}
+
+function stopAnimation() {
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
+    isAnimating = false;
+}
+
+// Pause animation when page is not visible to save resources
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        stopAnimation();
+    } else {
+        startAnimation();
+    }
+});
+
 init();
-animate();
+startAnimation();
+

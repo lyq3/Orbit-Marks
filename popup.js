@@ -13,6 +13,9 @@ let currentFolderId = '0';
 let allFolders = []; // To easily populate sidebar
 let navigationStack = [];
 
+// Fallback icon SVG for bookmarks with invalid URLs or failed favicon loads
+const FALLBACK_ICON_SVG = 'data:image/svg+xml;base64,' + btoa('<svg stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle></svg>');
+
 const TRANSLATIONS = {
     'en-US': {
         'brand.subtitle': 'OrbitMarks · Bookmarks in order, free to roam.',
@@ -27,7 +30,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'About',
         'settings.language': 'Language',
         'settings.language.select': 'Select Language',
-        'settings.about.version': 'v1.0.0',
+        'settings.about.version': 'v1.2.1',
         'settings.about.description': 'Bookmarks in order, free to roam.',
         'lang.system': 'Follow System',
         'lang.zhCN': '简体中文',
@@ -57,7 +60,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '关于',
         'settings.language': '语言',
         'settings.language.select': '选择语言',
-        'settings.about.version': '版本 v1.0.0',
+        'settings.about.version': '版本 v1.2.1',
         'settings.about.description': '书签有序，自由随行。',
         'lang.system': '跟随系统',
         'lang.zhCN': '简体中文',
@@ -87,7 +90,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '關於',
         'settings.language': '語言',
         'settings.language.select': '選擇語言',
-        'settings.about.version': '版本 v1.0.0',
+        'settings.about.version': '版本 v1.2.1',
         'settings.about.description': '書籤有序，自由隨行。',
         'lang.system': '跟隨系統',
         'lang.zhCN': '简体中文',
@@ -117,7 +120,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '情報',
         'settings.language': '言語',
         'settings.language.select': '言語を選択',
-        'settings.about.version': 'バージョン v1.0.0',
+        'settings.about.version': 'バージョン v1.2.1',
         'settings.about.description': 'ブックマークを整えて、自由に巡航。',
         'lang.system': 'システムに従う',
         'lang.zhCN': '简体中文',
@@ -147,7 +150,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '정보',
         'settings.language': '언어',
         'settings.language.select': '언어 선택',
-        'settings.about.version': '버전 v1.0.0',
+        'settings.about.version': '버전 v1.2.1',
         'settings.about.description': '북마크를 정돈하고 자유롭게 순항하세요.',
         'lang.system': '시스템과 동일',
         'lang.zhCN': '简体中文',
@@ -177,7 +180,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Acerca de',
         'settings.language': 'Idioma',
         'settings.language.select': 'Seleccionar idioma',
-        'settings.about.version': 'Versión v1.0.0',
+        'settings.about.version': 'Versión v1.2.1',
         'settings.about.description': 'Marcadores en orden, libres para moverse.',
         'lang.system': 'Seguir sistema',
         'lang.zhCN': '简体中文',
@@ -207,7 +210,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'À propos',
         'settings.language': 'Langue',
         'settings.language.select': 'Choisir une langue',
-        'settings.about.version': 'Version v1.0.0',
+        'settings.about.version': 'Version v1.2.1',
         'settings.about.description': 'Favoris ordonnés, liberté de navigation.',
         'lang.system': 'Suivre le système',
         'lang.zhCN': '简体中文',
@@ -237,7 +240,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Info',
         'settings.language': 'Sprache',
         'settings.language.select': 'Sprache auswählen',
-        'settings.about.version': 'Version v1.0.0',
+        'settings.about.version': 'Version v1.2.1',
         'settings.about.description': 'Lesezeichen geordnet, jederzeit griffbereit.',
         'lang.system': 'Systemsprache verwenden',
         'lang.zhCN': '简体中文',
@@ -267,7 +270,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Sobre',
         'settings.language': 'Idioma',
         'settings.language.select': 'Selecione o idioma',
-        'settings.about.version': 'Versão v1.0.0',
+        'settings.about.version': 'Versão v1.2.1',
         'settings.about.description': 'Favoritos organizados, livres para seguir.',
         'lang.system': 'Seguir sistema',
         'lang.zhCN': '简体中文',
@@ -297,7 +300,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'О приложении',
         'settings.language': 'Язык',
         'settings.language.select': 'Выберите язык',
-        'settings.about.version': 'Версия v1.0.0',
+        'settings.about.version': 'Версия v1.2.1',
         'settings.about.description': 'Закладки в порядке, свобода передвижения.',
         'lang.system': 'Следовать системе',
         'lang.zhCN': '简体中文',
@@ -320,13 +323,13 @@ let currentLang = 'en-US';
 
 function initLocalization() {
     const select = document.getElementById('language-select');
-    const savedLang = localStorage.getItem('nestlink_language') || 'system';
+    const savedLang = localStorage.getItem('orbitmarks_language') || 'system';
 
     if (select) {
         select.value = savedLang;
         select.addEventListener('change', (event) => {
             const newLang = event.target.value;
-            localStorage.setItem('nestlink_language', newLang);
+            localStorage.setItem('orbitmarks_language', newLang);
             updateLanguage(newLang);
         });
     }
@@ -405,15 +408,7 @@ function setTheme(theme) {
     localStorage.setItem('theme', theme);
     updateThemeIcon(theme);
     updateLogoText(theme);
-
-    // Update particles if they exist
-    if (typeof particlesArray !== 'undefined') {
-        // We might want to re-init particles or change their colors dynamically.
-        // For simplicity, let the particles script handle standard colors, 
-        // or simple hack: re-init to pick up new CSS variables if we used them in JS?
-        // Actually our particle script is simple. Let's just leave it for now, 
-        // opacity opacity change in CSS handles most of the look.
-    }
+    // Particle colors are handled by CSS opacity changes for different themes
 }
 
 function updateThemeIcon(theme) {
@@ -456,7 +451,7 @@ function fetchBookmarks() {
             const defaultId = rootNode.children && rootNode.children[0] ? rootNode.children[0].id : '0';
 
             // Memory: Load last active folder
-            const savedId = localStorage.getItem('nestlink_last_folder');
+            const savedId = localStorage.getItem('orbitmarks_last_folder');
             let startNode = null;
 
             if (savedId) {
@@ -606,7 +601,7 @@ function renderSidebarNode(node, container, depth) {
 
     wrapper.addEventListener('click', () => {
         currentFolderId = node.id;
-        localStorage.setItem('nestlink_last_folder', currentFolderId);
+        localStorage.setItem('orbitmarks_last_folder', currentFolderId);
         navigationStack = []; // Reset stack when jumping from sidebar
         renderSidebar();
         renderFolder(node);
@@ -634,8 +629,14 @@ function renderSidebarNode(node, container, depth) {
 function renderFolder(folderNode) {
     const container = document.getElementById('bookmarks-container');
     const backBtnContainer = document.getElementById('nav-controls');
+    const searchInput = document.getElementById('search-input');
 
     container.innerHTML = '';
+
+    // Clear search input when switching folders
+    if (searchInput) {
+        searchInput.value = '';
+    }
 
     // Update Nav
     if (backBtnContainer) {
@@ -695,26 +696,10 @@ function renderBookmarkItem(node, container) {
     if (isFolder) {
         item.addEventListener('click', (e) => {
             e.preventDefault();
-            // Enter folder logic
-            if (rootNode) {
-                navigationStack.push(node.parentId || currentFolderId); // Simplification: assume parent is current view
-                // Actually safer: push the *current* node being viewed before switching
-                // But renderFolder doesn't track "current rendered node" explicitly globally well enough
-                // Let's rely on the fact we are in 'currentFolderId' context?
-                // Wait, 'currentFolderId' is used for sidebar active state.
-                // If we drill down, sidebar might stay active on the root.
-                // Let's just push the ID of the folder we are LEAVING.
-                // We can't easily know that unless we store it.
-                // Let's store the node's parentId if available?
-                // Better: The `renderFolder` was called with SOME node. 
-                // Let's assume we are drilling down from `currentFolderId`? No, could be deep.
-                // Let's fix this: `renderFolder` should maybe update a global `currentViewNode`?
+            // Push the parent folder ID to navigation stack so we can go back
+            if (node.parentId) {
+                navigationStack.push(node.parentId);
             }
-            // For now, let's push the ID of the parent of the node we are clicking?
-            // No, we want to go BACK to where we were.
-            // If we are seeing this node, we are in its parent.
-            navigationStack.push(node.parentId);
-
             renderFolder(node);
         });
     }
@@ -729,9 +714,9 @@ function renderBookmarkItem(node, container) {
             icon.src = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
         } catch (e) {
             // Fallback for invalid URLs
-            icon.src = 'data:image/svg+xml;base64,' + btoa('<svg stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle></svg>');
+            icon.src = FALLBACK_ICON_SVG;
         }
-        icon.onerror = () => icon.src = 'data:image/svg+xml;base64,' + btoa('<svg stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle></svg>');
+        icon.onerror = () => icon.src = FALLBACK_ICON_SVG;
     }
 
     const details = document.createElement('div');
@@ -766,7 +751,9 @@ function setupSearch() {
         const items = document.querySelectorAll('.bookmark-item');
         items.forEach(item => {
             const title = item.querySelector('.bookmark-title').textContent.toLowerCase();
-            if (title.includes(query)) {
+            const url = item.href ? item.href.toLowerCase() : '';
+            // Search both title and URL
+            if (title.includes(query) || url.includes(query)) {
                 item.style.display = 'flex';
             } else {
                 item.style.display = 'none';
