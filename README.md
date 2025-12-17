@@ -1,54 +1,58 @@
 # OrbitMarks
 
-OrbitMarks 是一个 Material / Terminal 混合风格的 Chrome 书签插件，让「散落在各地的书签」重新回到同一个轨道。它支持亮暗主题、实时搜索、树状侧边栏导航，以及快捷的反馈/国际化体验，让浏览器工具栏变成真正实用的启动面板。
+OrbitMarks is a Chrome bookmarks side panel that blends soft Material cards with terminal-inspired typography. It turns your messy collection of saved links into a curated launchpad with live search, nested folders, and multilingual onboarding.
 
-## ✨ 功能亮点
+## ✨ Key Features
 
-- **多彩主题**：内置暗色与亮色两套视觉体系，字体、图标、动效全部自适应。
-- **智能搜索**：即时搜索当前文件夹下的书签，结果实时过滤，无需额外操作。
-- **层级导航**：支持递归折叠与展开，记忆上次打开的目录，快速在大型书签库中定位。
-- **国际化切换**：提供英语/中文/日语/韩语/西语/法语/德语等 10 种语言，并可跟随系统语言自动切换。
-- **轻量反馈**：内置反馈提示，点击即可通过邮件联系作者，简单直接。
+- **Unified command board** – Pin OrbitMarks next to the toolbar to reveal a distraction-free canvas for your most important bookmarks.
+- **Live, folder-aware search** – Type to instantly filter the current folder without leaving the keyboard or losing context.
+- **Nested tree navigation** – Expand/collapse folders in the sidebar, remember the last opened section, and dive into deep bookmark stacks with one click.
+- **International-ready copy** – Ship to the Chrome Web Store with English copy plus 10 additional languages and a “follow system” option.
+- **One-tap theming** – Switch between light and dark palettes; icons, gradients, and particles all adapt automatically.
+- **Built-in feedback lane** – A lightweight CTA keeps the support email one click away so early adopters can reach out.
 
-## 🚀 安装与使用
-
-1. 在 Chrome 浏览器输入 `chrome://extensions` 并开启右上角的 **开发者模式**。
-2. 点击「加载已解压的扩展程序」，选择本项目所在目录（即包含 `manifest.json` 的根目录）。
-3. 在工具栏固定 OrbitMarks 图标，即可在任何页面里一键打开侧边书签面板。
-
-> **提示**：如需定制图标或翻译，只要替换 `icons/` 下的 PNG 或 `popup.js` 中的 `TRANSLATIONS` 字段即可。
-
-## 🛠 开发
-
-```bash
-pnpm install  # 如果需要额外依赖，可自行添加
-pnpm dev      # 或直接在 Chrome 中加载该目录进行调试
-```
-
-核心文件：
-- `popup.html` / `styles.css` / `popup.js`：弹窗 UI、逻辑与主题控制。
-- `manifest.json`：声明扩展信息与权限（仅使用 `bookmarks` 权限）。
-- `icons/`：多尺寸透明背景的 OrbitMarks 标志。
-- `docs/screenshots/`：README 使用的示意图。
-
-## 📸 界面预览
+## 📸 Product Preview
 
 <table>
   <tr>
     <td align="center">
-      <strong>Dark Mode</strong><br>
-      <img src="docs/screenshots/dark-mode.png" alt="OrbitMarks dark mode" width="420">
+      <strong>Dark popup</strong><br>
+      <img src="docs/screenshots/popup-dark.png" alt="OrbitMarks dark popup" width="320">
     </td>
     <td align="center">
-      <strong>Light Mode</strong><br>
-      <img src="docs/screenshots/light-mode.png" alt="OrbitMarks light mode" width="420">
+      <strong>Light popup</strong><br>
+      <img src="docs/screenshots/popup-light.png" alt="OrbitMarks light popup" width="320">
     </td>
   </tr>
 </table>
 
-## 💬 反馈
+## 🚀 Installation
 
-如有问题或建议，欢迎发送邮件至 [support@btman.net](mailto:support@btman.net)。
+1. Go to `chrome://extensions` and enable **Developer mode** in the top-right corner.
+2. Click **Load unpacked** and choose this repository folder (the one containing `manifest.json`).
+3. Pin the OrbitMarks icon so the popup is always available from the toolbar.
+
+> Need branding tweaks? Replace the PNGs in `icons/`. Need new languages? Extend `TRANSLATIONS` inside `popup.js`.
+
+## 🛠 Development
+
+```bash
+# Install dependencies if you plan to extend the toolchain
+pnpm install
+
+# Load the extension in Chrome for live debugging
+pnpm dev
+```
+
+Key files:
+- `popup.html`, `styles.css`, `popup.js` – UI layout, theming, and bookmark rendering logic.
+- `manifest.json` – Extension declaration (only uses the `bookmarks` permission).
+- `icons/` – Multi-size OrbitMarks logos for Chrome.
+- `docs/screenshots/` – Assets used on the Chrome Web Store listing and README.
+
+## 💬 Support
+
+Questions or feature ideas? Email [support@btman.net](mailto:support@btman.net) and we’ll get back to you soon.
 
 ---
 Made with ❤️ for an organized browsing orbit.

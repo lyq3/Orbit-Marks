@@ -866,10 +866,33 @@ function renderMockData() {
                 children: [
                     { id: '11', title: 'Google', url: 'https://google.com' },
                     { id: '12', title: 'YouTube', url: 'https://youtube.com' },
+                    { id: '13', title: 'OrbitMarks Landing Page', url: 'https://orbitmarks.app' },
                     {
-                        id: '13', title: 'Work Stuff',
+                        id: '14', title: 'Work Dashboard',
+                        url: 'https://notion.so/work-dashboard'
+                    },
+                    {
+                        id: '15', title: 'Daily Tools',
                         children: [
-                            { id: '131', title: 'Jira', url: 'https://jira.com' }
+                            { id: '151', title: 'Linear', url: 'https://linear.app' },
+                            { id: '152', title: 'Figma', url: 'https://figma.com' },
+                            { id: '153', title: 'Asana', url: 'https://asana.com' }
+                        ]
+                    },
+                    {
+                        id: '16', title: 'Research',
+                        children: [
+                            { id: '161', title: 'Arc Design Articles', url: 'https://arc.net/library' },
+                            { id: '162', title: 'Smashing Magazine', url: 'https://smashingmagazine.com' },
+                            { id: '163', title: 'Dev.to', url: 'https://dev.to' }
+                        ]
+                    },
+                    {
+                        id: '17', title: 'Work Stuff',
+                        children: [
+                            { id: '171', title: 'Jira', url: 'https://jira.com' },
+                            { id: '172', title: 'GitHub Issues', url: 'https://github.com/issues' },
+                            { id: '173', title: 'Analytics Dashboard', url: 'https://datastudio.google.com' }
                         ]
                     }
                 ]
@@ -878,8 +901,44 @@ function renderMockData() {
                 id: '2',
                 title: 'Other Bookmarks',
                 children: [
-                    { id: '21', title: 'Cooking', url: 'https://recipes.com' },
-                    { id: '22', title: 'News', url: 'https://news.com' }
+                    { id: '21', title: 'Cooking', url: 'https://tastespotting.com' },
+                    { id: '22', title: 'Morning News', url: 'https://news.com' },
+                    {
+                        id: '23',
+                        title: 'Learn',
+                        children: [
+                            { id: '231', title: 'MDN Web Docs', url: 'https://developer.mozilla.org' },
+                            { id: '232', title: 'CSS-Tricks Almanac', url: 'https://css-tricks.com/almanac/' },
+                            { id: '233', title: 'Khan Academy CS', url: 'https://khanacademy.org/computing' }
+                        ]
+                    },
+                    {
+                        id: '24',
+                        title: 'Inspiration Boards',
+                        children: [
+                            { id: '241', title: 'Awwwards', url: 'https://awwwards.com' },
+                            { id: '242', title: 'Dribbble Shots', url: 'https://dribbble.com' },
+                            { id: '243', title: 'Behance Curated', url: 'https://behance.net/galleries' }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: '3',
+                title: 'Reading List',
+                children: [
+                    { id: '31', title: 'Wait But Why', url: 'https://waitbutwhy.com' },
+                    { id: '32', title: 'Stratechery', url: 'https://stratechery.com' },
+                    { id: '33', title: 'Every.to', url: 'https://every.to' },
+                    {
+                        id: '34',
+                        title: 'Podcasts',
+                        children: [
+                            { id: '341', title: 'Lex Fridman', url: 'https://lexfridman.com/podcast/' },
+                            { id: '342', title: 'Acquired', url: 'https://www.acquired.fm/' },
+                            { id: '343', title: 'Indie Hackers', url: 'https://www.indiehackers.com/podcast' }
+                        ]
+                    }
                 ]
             }
         ]
