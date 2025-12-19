@@ -53,8 +53,8 @@ OrbitMarks transforms your messy bookmark collection into a beautifully organize
 
 1. Clone or download this repository:
    ```bash
-   git clone https://github.com/lyq3/TAB-EXT.git
-   cd TAB-EXT
+   git clone https://github.com/lyq3/Orbit-Marks.git
+   cd Orbit-Marks
    ```
 
 2. Open Chrome and navigate to `chrome://extensions`
@@ -84,7 +84,7 @@ This extension uses vanilla JavaScript with no build step required.
 
 ```bash
 # Clone the repository
-git clone https://github.com/lyq3/TAB-EXT.git
+git clone https://github.com/lyq3/Orbit-Marks.git
 
 # Load in Chrome as unpacked extension
 # Make changes and reload extension to see updates
@@ -139,7 +139,7 @@ git clone https://github.com/lyq3/TAB-EXT.git
 Questions, bugs, or feature requests? 
 
 - 📧 Email: [support@btman.net](mailto:support@btman.net)
-- 🐛 Issues: [GitHub Issues](https://github.com/lyq3/TAB-EXT/issues)
+- 🐛 Issues: [GitHub Issues](https://github.com/lyq3/Orbit-Marks/issues)
 
 ## 📄 License
 
