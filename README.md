@@ -11,7 +11,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Manifest-V3-blue" alt="Manifest V3">
   <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
-  <img src="https://img.shields.io/badge/Version-1.2.1-orange" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.2.2-orange" alt="Version">
 </p>
 
 ---
@@ -47,7 +47,7 @@ OrbitMarks transforms your messy bookmark collection into a beautifully organize
 ## 🚀 Installation
 
 ### From Chrome Web Store
-> Coming soon...
+> https://chromewebstore.google.com/detail/orbitmarks/jlmbigebggmccmejhgfajjpggdhpinoe
 
 ### Manual Installation (Developer Mode)
 
@@ -120,6 +120,12 @@ git clone https://github.com/lyq3/Orbit-Marks.git
 | Русский | `ru-RU` |
 
 ## 📝 Changelog
+
+### v1.2.2
+- 🔒 Security: Replaced innerHTML with DOM API to prevent XSS vulnerabilities
+- 🌐 i18n: Added `nav.untitled` translation key for all 10 languages
+- 🐛 Fixed: Sidebar highlight now syncs correctly when clicking back button
+- ♻️ Refactored: Simplified folder name display logic (Chrome auto-localizes root folders)
 
 ### v1.2.1
 - Fixed LocalStorage key naming inconsistency
