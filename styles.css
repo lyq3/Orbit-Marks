@@ -858,6 +858,30 @@ body.sidebar-collapsed #sidebar-toggle svg {
     background: #fff;
 }
 
+/* iOS-style Drag and Drop */
+.bookmark-item.dragging {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    opacity: 0.95;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* Placeholder for dragged item */
+.drag-placeholder {
+    background: rgba(66, 133, 244, 0.1);
+    border: 2px dashed var(--accent-primary);
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+/* Smooth transition for items during drag */
+.bookmarks-grid.drag-active .bookmark-item:not(.dragging) {
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
 .bookmark-icon {
     width: 32px;
     height: 32px;

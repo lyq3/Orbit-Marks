@@ -11,7 +11,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Manifest-V3-blue" alt="Manifest V3">
   <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
-  <img src="https://img.shields.io/badge/Version-1.2.4-orange" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.2.6-orange" alt="Version">
 </p>
 
 ---
@@ -29,6 +29,7 @@ OrbitMarks transforms your messy bookmark collection into a beautifully organize
 | ⚡ **Lightweight** | Only requires `bookmarks` permission, no background scripts |
 | ✨ **Particle Effects** | Subtle animated background with auto-pause when hidden |
 | ⌨️ **Keyboard Shortcuts** | `/` to search, `↑↓` navigate, `Enter` open, `Esc` close |
+| 🔄 **Drag & Drop** | Reorder bookmarks and folders by dragging |
 
 ## 📸 Screenshots
 
@@ -121,6 +122,16 @@ git clone https://github.com/lyq3/Orbit-Marks.git
 | Русский | `ru-RU` |
 
 ## 📝 Changelog
+
+### v1.2.6
+- 🎯 **iOS-style Drag Animation**: Smooth drag-and-drop with floating element, placeholder, and auto-slide effect
+- 🎯 Visual feedback: shadow, scale, rotation during drag
+- 🔄 Other items automatically slide to make room
+
+### v1.2.5
+- 🔄 **Drag & Drop**: Reorder bookmarks and folders by dragging
+- 🎯 Visual feedback during drag (opacity + border highlight)
+- 💾 Persists order via `chrome.bookmarks.move()` API
 
 ### v1.2.4
 - ⌨️ **Keyboard Shortcuts**: `/` to focus search, `↑↓` navigate bookmarks, `Enter` open, `Esc` close, `Backspace` go back

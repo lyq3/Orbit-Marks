@@ -35,7 +35,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'About',
         'settings.language': 'Language',
         'settings.language.select': 'Select Language',
-        'settings.about.version': 'v1.2.4',
+        'settings.about.version': 'v1.2.6',
         'settings.about.description': 'Bookmarks in order, free to roam.',
         'lang.system': 'Follow System',
         'lang.zhCN': '简体中文',
@@ -69,7 +69,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '关于',
         'settings.language': '语言',
         'settings.language.select': '选择语言',
-        'settings.about.version': '版本 v1.2.4',
+        'settings.about.version': '版本 v1.2.6',
         'settings.about.description': '书签有序，自由随行。',
         'lang.system': '跟随系统',
         'lang.zhCN': '简体中文',
@@ -103,7 +103,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '關於',
         'settings.language': '語言',
         'settings.language.select': '選擇語言',
-        'settings.about.version': '版本 v1.2.4',
+        'settings.about.version': '版本 v1.2.6',
         'settings.about.description': '書籤有序，自由隨行。',
         'lang.system': '跟隨系統',
         'lang.zhCN': '简体中文',
@@ -137,7 +137,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '情報',
         'settings.language': '言語',
         'settings.language.select': '言語を選択',
-        'settings.about.version': 'バージョン v1.2.4',
+        'settings.about.version': 'バージョン v1.2.6',
         'settings.about.description': 'ブックマークを整えて、自由に巡航。',
         'lang.system': 'システムに従う',
         'lang.zhCN': '简体中文',
@@ -171,7 +171,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '정보',
         'settings.language': '언어',
         'settings.language.select': '언어 선택',
-        'settings.about.version': '버전 v1.2.4',
+        'settings.about.version': '버전 v1.2.6',
         'settings.about.description': '북마크를 정돈하고 자유롭게 순항하세요.',
         'lang.system': '시스템과 동일',
         'lang.zhCN': '简体中文',
@@ -205,7 +205,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Acerca de',
         'settings.language': 'Idioma',
         'settings.language.select': 'Seleccionar idioma',
-        'settings.about.version': 'Versión v1.2.4',
+        'settings.about.version': 'Versión v1.2.6',
         'settings.about.description': 'Marcadores en orden, libres para moverse.',
         'lang.system': 'Seguir sistema',
         'lang.zhCN': '简体中文',
@@ -239,7 +239,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'À propos',
         'settings.language': 'Langue',
         'settings.language.select': 'Choisir une langue',
-        'settings.about.version': 'Version v1.2.4',
+        'settings.about.version': 'Version v1.2.6',
         'settings.about.description': 'Favoris ordonnés, liberté de navigation.',
         'lang.system': 'Suivre le système',
         'lang.zhCN': '简体中文',
@@ -273,7 +273,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Info',
         'settings.language': 'Sprache',
         'settings.language.select': 'Sprache auswählen',
-        'settings.about.version': 'Version v1.2.4',
+        'settings.about.version': 'Version v1.2.6',
         'settings.about.description': 'Lesezeichen geordnet, jederzeit griffbereit.',
         'lang.system': 'Systemsprache verwenden',
         'lang.zhCN': '简体中文',
@@ -307,7 +307,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Sobre',
         'settings.language': 'Idioma',
         'settings.language.select': 'Selecione o idioma',
-        'settings.about.version': 'Versão v1.2.4',
+        'settings.about.version': 'Versão v1.2.6',
         'settings.about.description': 'Favoritos organizados, livres para seguir.',
         'lang.system': 'Seguir sistema',
         'lang.zhCN': '简体中文',
@@ -341,7 +341,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'О приложении',
         'settings.language': 'Язык',
         'settings.language.select': 'Выберите язык',
-        'settings.about.version': 'Версия v1.2.4',
+        'settings.about.version': 'Версия v1.2.6',
         'settings.about.description': 'Закладки в порядке, свобода передвижения.',
         'lang.system': 'Следовать системе',
         'lang.zhCN': '简体中文',
@@ -760,6 +760,11 @@ function renderBookmarkItem(node, container) {
     item.href = isFolder ? '#' : node.url;
     if (!isFolder) item.target = '_blank';
 
+    // Disable native drag (using Pointer Events instead)
+    item.draggable = false;
+    item.dataset.id = node.id;
+    item.dataset.parentId = node.parentId || '';
+
     if (isFolder) {
         item.addEventListener('click', (e) => {
             e.preventDefault();
@@ -773,6 +778,9 @@ function renderBookmarkItem(node, container) {
             renderFolder(node);
         });
     }
+
+    // Drag events (using Pointer Events for iOS-style)
+    initDragListeners(item);
 
     const icon = document.createElement('img');
     icon.className = 'bookmark-icon';
@@ -1344,3 +1352,191 @@ if (originalRenderFolder) {
     // Note: Selection is automatically cleared when renderFolder is called 
     // because the DOM is rebuilt
 }
+
+// ===================
+// iOS-style Drag and Drop Sorting (Pointer Events)
+// ===================
+
+let draggedElement = null;
+let draggedBookmarkId = null;
+let dragPlaceholder = null;
+let dragOffsetX = 0;
+let dragOffsetY = 0;
+let originalRect = null;
+let isDragging = false;
+let pendingDrag = null; // Store pending drag info
+const DRAG_THRESHOLD = 5; // Pixels to move before drag starts
+
+function initDragListeners(item) {
+    item.addEventListener('pointerdown', handlePointerDown);
+    item.addEventListener('dragstart', (e) => e.preventDefault());
+}
+
+function handlePointerDown(e) {
+    if (e.button !== 0) return;
+
+    const element = e.target.closest('.bookmark-item');
+    if (!element) return;
+
+    // Store pending drag info - don't start drag yet
+    pendingDrag = {
+        element: element,
+        startX: e.clientX,
+        startY: e.clientY,
+        pointerId: e.pointerId
+    };
+
+    document.addEventListener('pointermove', handlePointerMove);
+    document.addEventListener('pointerup', handlePointerUp);
+}
+
+function startActualDrag(e) {
+    if (!pendingDrag) return;
+
+    draggedElement = pendingDrag.element;
+    draggedBookmarkId = draggedElement.dataset.id;
+    originalRect = draggedElement.getBoundingClientRect();
+    dragOffsetX = pendingDrag.startX - originalRect.left;
+    dragOffsetY = pendingDrag.startY - originalRect.top;
+
+    // Create placeholder
+    dragPlaceholder = document.createElement('div');
+    dragPlaceholder.className = 'drag-placeholder';
+    dragPlaceholder.style.width = originalRect.width + 'px';
+    dragPlaceholder.style.height = originalRect.height + 'px';
+    draggedElement.parentNode.insertBefore(dragPlaceholder, draggedElement);
+
+    // Make element float
+    draggedElement.classList.add('dragging');
+    draggedElement.style.width = originalRect.width + 'px';
+    draggedElement.style.height = originalRect.height + 'px';
+    draggedElement.style.left = originalRect.left + 'px';
+    draggedElement.style.top = originalRect.top + 'px';
+
+    document.querySelector('.bookmarks-grid')?.classList.add('drag-active');
+    isDragging = true;
+    pendingDrag = null;
+}
+
+function handlePointerMove(e) {
+    // Check if we should start drag (pending but not yet dragging)
+    if (pendingDrag && !isDragging) {
+        const dx = e.clientX - pendingDrag.startX;
+        const dy = e.clientY - pendingDrag.startY;
+        if (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD) {
+            startActualDrag(e);
+        }
+        return;
+    }
+
+    if (!isDragging || !draggedElement) return;
+
+    draggedElement.style.left = (e.clientX - dragOffsetX) + 'px';
+    draggedElement.style.top = (e.clientY - dragOffsetY) + 'px';
+
+    const grid = document.querySelector('.bookmarks-grid');
+    if (!grid) return;
+
+    const items = Array.from(grid.querySelectorAll('.bookmark-item:not(.dragging)'));
+    let targetIndex = -1;
+
+    for (let i = 0; i < items.length; i++) {
+        const rect = items[i].getBoundingClientRect();
+        if (e.clientX >= rect.left && e.clientX <= rect.right &&
+            e.clientY >= rect.top && e.clientY <= rect.bottom) {
+            targetIndex = e.clientX < rect.left + rect.width / 2 ? i : i + 1;
+            break;
+        }
+    }
+
+    if (targetIndex >= 0 && dragPlaceholder) {
+        if (targetIndex >= items.length) {
+            grid.appendChild(dragPlaceholder);
+        } else {
+            grid.insertBefore(dragPlaceholder, items[targetIndex]);
+        }
+    }
+}
+
+function handlePointerUp(e) {
+    document.removeEventListener('pointermove', handlePointerMove);
+    document.removeEventListener('pointerup', handlePointerUp);
+
+    // If drag never started (just a click), allow normal link behavior
+    if (pendingDrag && !isDragging) {
+        const element = pendingDrag.element;
+        pendingDrag = null;
+        // Navigate to link if it's a bookmark (not folder)
+        if (element.href && element.href !== '#' && !element.href.endsWith('#')) {
+            window.open(element.href, '_blank');
+        }
+        return;
+    }
+
+    if (!isDragging || !draggedElement) {
+        pendingDrag = null;
+        return;
+    }
+
+    isDragging = false;
+
+    const grid = document.querySelector('.bookmarks-grid');
+
+    if (dragPlaceholder && dragPlaceholder.parentNode) {
+        const placeholderRect = dragPlaceholder.getBoundingClientRect();
+        draggedElement.style.transition = 'all 0.2s ease';
+        draggedElement.style.left = placeholderRect.left + 'px';
+        draggedElement.style.top = placeholderRect.top + 'px';
+
+        setTimeout(() => {
+            if (!draggedElement) return;
+
+            // Calculate index BEFORE moving elements (use placeholder position)
+            let newIndex = -1;
+            if (grid && dragPlaceholder?.parentNode) {
+                // Get index from placeholder position among bookmark items
+                const allChildren = Array.from(grid.children);
+                const placeholderPos = allChildren.indexOf(dragPlaceholder);
+                // Count only bookmark items before placeholder
+                newIndex = allChildren.slice(0, placeholderPos).filter(
+                    el => el.classList.contains('bookmark-item')
+                ).length;
+            }
+
+            draggedElement.classList.remove('dragging');
+            draggedElement.style.cssText = '';
+
+            // Insert element at placeholder position, then remove placeholder
+            if (dragPlaceholder?.parentNode) {
+                dragPlaceholder.parentNode.insertBefore(draggedElement, dragPlaceholder);
+                dragPlaceholder.remove();
+            }
+
+            grid?.classList.remove('drag-active');
+
+            // Call Chrome API with pre-calculated index
+            if (grid && newIndex >= 0 && typeof chrome !== 'undefined' && chrome.bookmarks?.move) {
+                chrome.bookmarks.move(draggedBookmarkId, {
+                    parentId: draggedElement.dataset.parentId || currentFolderId,
+                    index: newIndex
+                }, fetchBookmarks);
+            }
+
+            draggedElement = null;
+            draggedBookmarkId = null;
+            dragPlaceholder = null;
+            originalRect = null;
+        }, 200);
+    } else {
+        draggedElement.classList.remove('dragging');
+        draggedElement.style.cssText = '';
+        grid?.classList.remove('drag-active');
+        draggedElement = draggedBookmarkId = dragPlaceholder = originalRect = null;
+    }
+}
+
+function handleDragStart(e) { e.preventDefault(); }
+function handleDragEnd(e) { }
+function handleDragOver(e) { e.preventDefault(); }
+function handleDragLeave(e) { }
+function handleDrop(e) { e.preventDefault(); }
