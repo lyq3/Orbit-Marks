@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNavigation();
     setupSettings();
     setupSidebarToggle();
+    setupKeyboardShortcuts();
 });
 
 let rootNode = null;
@@ -34,7 +35,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'About',
         'settings.language': 'Language',
         'settings.language.select': 'Select Language',
-        'settings.about.version': 'v1.2.3',
+        'settings.about.version': 'v1.2.4',
         'settings.about.description': 'Bookmarks in order, free to roam.',
         'lang.system': 'Follow System',
         'lang.zhCN': '简体中文',
@@ -68,7 +69,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '关于',
         'settings.language': '语言',
         'settings.language.select': '选择语言',
-        'settings.about.version': '版本 v1.2.3',
+        'settings.about.version': '版本 v1.2.4',
         'settings.about.description': '书签有序，自由随行。',
         'lang.system': '跟随系统',
         'lang.zhCN': '简体中文',
@@ -102,7 +103,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '關於',
         'settings.language': '語言',
         'settings.language.select': '選擇語言',
-        'settings.about.version': '版本 v1.2.3',
+        'settings.about.version': '版本 v1.2.4',
         'settings.about.description': '書籤有序，自由隨行。',
         'lang.system': '跟隨系統',
         'lang.zhCN': '简体中文',
@@ -136,7 +137,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '情報',
         'settings.language': '言語',
         'settings.language.select': '言語を選択',
-        'settings.about.version': 'バージョン v1.2.3',
+        'settings.about.version': 'バージョン v1.2.4',
         'settings.about.description': 'ブックマークを整えて、自由に巡航。',
         'lang.system': 'システムに従う',
         'lang.zhCN': '简体中文',
@@ -170,7 +171,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '정보',
         'settings.language': '언어',
         'settings.language.select': '언어 선택',
-        'settings.about.version': '버전 v1.2.3',
+        'settings.about.version': '버전 v1.2.4',
         'settings.about.description': '북마크를 정돈하고 자유롭게 순항하세요.',
         'lang.system': '시스템과 동일',
         'lang.zhCN': '简体中文',
@@ -204,7 +205,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Acerca de',
         'settings.language': 'Idioma',
         'settings.language.select': 'Seleccionar idioma',
-        'settings.about.version': 'Versión v1.2.3',
+        'settings.about.version': 'Versión v1.2.4',
         'settings.about.description': 'Marcadores en orden, libres para moverse.',
         'lang.system': 'Seguir sistema',
         'lang.zhCN': '简体中文',
@@ -238,7 +239,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'À propos',
         'settings.language': 'Langue',
         'settings.language.select': 'Choisir une langue',
-        'settings.about.version': 'Version v1.2.3',
+        'settings.about.version': 'Version v1.2.4',
         'settings.about.description': 'Favoris ordonnés, liberté de navigation.',
         'lang.system': 'Suivre le système',
         'lang.zhCN': '简体中文',
@@ -272,7 +273,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Info',
         'settings.language': 'Sprache',
         'settings.language.select': 'Sprache auswählen',
-        'settings.about.version': 'Version v1.2.3',
+        'settings.about.version': 'Version v1.2.4',
         'settings.about.description': 'Lesezeichen geordnet, jederzeit griffbereit.',
         'lang.system': 'Systemsprache verwenden',
         'lang.zhCN': '简体中文',
@@ -306,7 +307,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Sobre',
         'settings.language': 'Idioma',
         'settings.language.select': 'Selecione o idioma',
-        'settings.about.version': 'Versão v1.2.3',
+        'settings.about.version': 'Versão v1.2.4',
         'settings.about.description': 'Favoritos organizados, livres para seguir.',
         'lang.system': 'Seguir sistema',
         'lang.zhCN': '简体中文',
@@ -340,7 +341,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'О приложении',
         'settings.language': 'Язык',
         'settings.language.select': 'Выберите язык',
-        'settings.about.version': 'Версия v1.2.3',
+        'settings.about.version': 'Версия v1.2.4',
         'settings.about.description': 'Закладки в порядке, свобода передвижения.',
         'lang.system': 'Следовать системе',
         'lang.zhCN': '简体中文',
@@ -1227,4 +1228,119 @@ function renderMockData() {
     currentFolderId = '1';
     renderSidebar();
     renderFolder(rootNode.children[0]);
+}
+
+// Keyboard navigation state
+let selectedBookmarkIndex = -1;
+
+function setupKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        const settingsOverlay = document.getElementById('settings-overlay');
+        const settingsOpen = settingsOverlay?.classList.contains('open');
+        const searchInput = document.getElementById('search-input');
+        const searchFocused = document.activeElement === searchInput;
+        const globalResultsVisible = document.getElementById('global-search-results')?.classList.contains('visible');
+
+        // "/" - Focus search (when not already focused and settings closed)
+        if (e.key === '/' && !searchFocused && !settingsOpen) {
+            e.preventDefault();
+            searchInput?.focus();
+            return;
+        }
+
+        // "Escape" - Close dialogs / Clear search / Deselect
+        if (e.key === 'Escape') {
+            if (settingsOpen) {
+                settingsOverlay.classList.remove('open');
+            } else if (globalResultsVisible) {
+                document.getElementById('global-search-results').classList.remove('visible');
+            } else if (searchFocused) {
+                searchInput.blur();
+                if (searchInput.value) {
+                    searchInput.value = '';
+                    // Trigger input event to reset search
+                    searchInput.dispatchEvent(new Event('input'));
+                }
+            } else if (selectedBookmarkIndex >= 0) {
+                clearBookmarkSelection();
+            }
+            return;
+        }
+
+        // Don't handle other shortcuts when typing in search or settings open
+        if (searchFocused || settingsOpen) return;
+
+        // Arrow keys - Navigate bookmarks
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            const direction = e.key === 'ArrowDown' ? 1 : -1;
+            navigateBookmarks(direction);
+            return;
+        }
+
+        // "Enter" - Open selected bookmark
+        if (e.key === 'Enter' && selectedBookmarkIndex >= 0) {
+            e.preventDefault();
+            openSelectedBookmark();
+            return;
+        }
+
+        // "Backspace" - Go back to parent folder
+        if (e.key === 'Backspace' && navigationStack.length > 0) {
+            e.preventDefault();
+            document.getElementById('back-btn')?.click();
+            return;
+        }
+    });
+}
+
+function navigateBookmarks(direction) {
+    const items = document.querySelectorAll('.bookmarks-grid .bookmark-item');
+    if (items.length === 0) return;
+
+    // Clear previous selection
+    items.forEach(item => item.classList.remove('selected'));
+
+    // Calculate new index
+    if (selectedBookmarkIndex === -1) {
+        // No current selection, start from first or last
+        selectedBookmarkIndex = direction > 0 ? 0 : items.length - 1;
+    } else {
+        selectedBookmarkIndex += direction;
+        // Wrap around
+        if (selectedBookmarkIndex < 0) selectedBookmarkIndex = items.length - 1;
+        if (selectedBookmarkIndex >= items.length) selectedBookmarkIndex = 0;
+    }
+
+    // Apply selection
+    const selectedItem = items[selectedBookmarkIndex];
+    if (selectedItem) {
+        selectedItem.classList.add('selected');
+        selectedItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+}
+
+function openSelectedBookmark() {
+    const items = document.querySelectorAll('.bookmarks-grid .bookmark-item');
+    const selectedItem = items[selectedBookmarkIndex];
+
+    if (selectedItem) {
+        // Simulate a click on the selected item
+        selectedItem.click();
+        // Clear selection after opening
+        clearBookmarkSelection();
+    }
+}
+
+function clearBookmarkSelection() {
+    const items = document.querySelectorAll('.bookmarks-grid .bookmark-item');
+    items.forEach(item => item.classList.remove('selected'));
+    selectedBookmarkIndex = -1;
+}
+
+// Reset selection when folder changes
+const originalRenderFolder = typeof renderFolder !== 'undefined' ? renderFolder : null;
+if (originalRenderFolder) {
+    // Note: Selection is automatically cleared when renderFolder is called 
+    // because the DOM is rebuilt
 }

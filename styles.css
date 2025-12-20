@@ -838,6 +838,18 @@ body.sidebar-collapsed #sidebar-toggle svg {
     box-shadow: var(--shadow-card);
 }
 
+/* Keyboard navigation selected state */
+.bookmark-item.selected {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    background: var(--hover-bg);
+}
+
+.bookmark-item:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
 [data-theme="light"] .bookmark-item {
     border: 1px solid transparent;
 }

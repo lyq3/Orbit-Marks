@@ -11,7 +11,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Manifest-V3-blue" alt="Manifest V3">
   <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
-  <img src="https://img.shields.io/badge/Version-1.2.3-orange" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.2.4-orange" alt="Version">
 </p>
 
 ---
@@ -28,6 +28,7 @@ OrbitMarks transforms your messy bookmark collection into a beautifully organize
 | 🌐 **11 Languages** | Full i18n support with "Follow System" option |
 | ⚡ **Lightweight** | Only requires `bookmarks` permission, no background scripts |
 | ✨ **Particle Effects** | Subtle animated background with auto-pause when hidden |
+| ⌨️ **Keyboard Shortcuts** | `/` to search, `↑↓` navigate, `Enter` open, `Esc` close |
 
 ## 📸 Screenshots
 
@@ -120,6 +121,10 @@ git clone https://github.com/lyq3/Orbit-Marks.git
 | Русский | `ru-RU` |
 
 ## 📝 Changelog
+
+### v1.2.4
+- ⌨️ **Keyboard Shortcuts**: `/` to focus search, `↑↓` navigate bookmarks, `Enter` open, `Esc` close, `Backspace` go back
+- 🎯 Visual feedback for selected bookmark during keyboard navigation
 
 ### v1.2.3
 - 🌐 **Global Search**: Added search mode toggle to search across all bookmarks
