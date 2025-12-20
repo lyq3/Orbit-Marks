@@ -20,6 +20,10 @@ const TRANSLATIONS = {
     'en-US': {
         'brand.subtitle': 'OrbitMarks · Bookmarks in order, free to roam.',
         'search.placeholder': 'Search your bookmarks...',
+        'search.placeholder.global': 'Search all bookmarks...',
+        'search.mode.folder': 'Search current folder',
+        'search.mode.global': 'Search all bookmarks',
+        'search.no.results': 'No bookmarks found',
         'nav.back': 'Back',
         'nav.untitled': 'Untitled',
         'bookmarks.empty': 'Empty Directory',
@@ -30,7 +34,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'About',
         'settings.language': 'Language',
         'settings.language.select': 'Select Language',
-        'settings.about.version': 'v1.2.2',
+        'settings.about.version': 'v1.2.3',
         'settings.about.description': 'Bookmarks in order, free to roam.',
         'lang.system': 'Follow System',
         'lang.zhCN': '简体中文',
@@ -50,6 +54,10 @@ const TRANSLATIONS = {
     'zh-CN': {
         'brand.subtitle': 'OrbitMarks · 书签有序，自由随行。',
         'search.placeholder': '搜索书签...',
+        'search.placeholder.global': '搜索所有书签...',
+        'search.mode.folder': '搜索当前文件夹',
+        'search.mode.global': '搜索所有书签',
+        'search.no.results': '未找到书签',
         'nav.back': '返回',
         'nav.untitled': '未命名',
         'bookmarks.empty': '空文件夹',
@@ -60,7 +68,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '关于',
         'settings.language': '语言',
         'settings.language.select': '选择语言',
-        'settings.about.version': '版本 v1.2.2',
+        'settings.about.version': '版本 v1.2.3',
         'settings.about.description': '书签有序，自由随行。',
         'lang.system': '跟随系统',
         'lang.zhCN': '简体中文',
@@ -80,6 +88,10 @@ const TRANSLATIONS = {
     'zh-TW': {
         'brand.subtitle': 'OrbitMarks · 書籤有序，自由隨行。',
         'search.placeholder': '搜尋書籤...',
+        'search.placeholder.global': '搜尋所有書籤...',
+        'search.mode.folder': '搜尋當前資料夾',
+        'search.mode.global': '搜尋所有書籤',
+        'search.no.results': '未找到書籤',
         'nav.back': '返回',
         'nav.untitled': '未命名',
         'bookmarks.empty': '空資料夾',
@@ -90,7 +102,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '關於',
         'settings.language': '語言',
         'settings.language.select': '選擇語言',
-        'settings.about.version': '版本 v1.2.2',
+        'settings.about.version': '版本 v1.2.3',
         'settings.about.description': '書籤有序，自由隨行。',
         'lang.system': '跟隨系統',
         'lang.zhCN': '简体中文',
@@ -110,6 +122,10 @@ const TRANSLATIONS = {
     'ja-JP': {
         'brand.subtitle': 'OrbitMarks · ブックマークを整え、自由に巡航。',
         'search.placeholder': 'ブックマークを検索...',
+        'search.placeholder.global': 'すべてのブックマークを検索...',
+        'search.mode.folder': '現在のフォルダーを検索',
+        'search.mode.global': 'すべてのブックマークを検索',
+        'search.no.results': 'ブックマークが見つかりません',
         'nav.back': '戻る',
         'nav.untitled': '無題',
         'bookmarks.empty': 'フォルダーは空です',
@@ -120,7 +136,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '情報',
         'settings.language': '言語',
         'settings.language.select': '言語を選択',
-        'settings.about.version': 'バージョン v1.2.2',
+        'settings.about.version': 'バージョン v1.2.3',
         'settings.about.description': 'ブックマークを整えて、自由に巡航。',
         'lang.system': 'システムに従う',
         'lang.zhCN': '简体中文',
@@ -140,6 +156,10 @@ const TRANSLATIONS = {
     'ko-KR': {
         'brand.subtitle': 'OrbitMarks · 북마크를 정돈하고 자유롭게 순항하세요.',
         'search.placeholder': '북마크 검색...',
+        'search.placeholder.global': '모든 북마크 검색...',
+        'search.mode.folder': '현재 폴더 검색',
+        'search.mode.global': '모든 북마크 검색',
+        'search.no.results': '북마크를 찾을 수 없습니다',
         'nav.back': '뒤로',
         'nav.untitled': '제목 없음',
         'bookmarks.empty': '비어 있는 폴더',
@@ -150,7 +170,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '정보',
         'settings.language': '언어',
         'settings.language.select': '언어 선택',
-        'settings.about.version': '버전 v1.2.2',
+        'settings.about.version': '버전 v1.2.3',
         'settings.about.description': '북마크를 정돈하고 자유롭게 순항하세요.',
         'lang.system': '시스템과 동일',
         'lang.zhCN': '简体中文',
@@ -170,6 +190,10 @@ const TRANSLATIONS = {
     'es-ES': {
         'brand.subtitle': 'OrbitMarks · Marcadores en orden, libres para moverse.',
         'search.placeholder': 'Busca en tus marcadores...',
+        'search.placeholder.global': 'Buscar en todos los marcadores...',
+        'search.mode.folder': 'Buscar en carpeta actual',
+        'search.mode.global': 'Buscar en todos los marcadores',
+        'search.no.results': 'No se encontraron marcadores',
         'nav.back': 'Volver',
         'nav.untitled': 'Sin título',
         'bookmarks.empty': 'Carpeta vacía',
@@ -180,7 +204,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Acerca de',
         'settings.language': 'Idioma',
         'settings.language.select': 'Seleccionar idioma',
-        'settings.about.version': 'Versión v1.2.2',
+        'settings.about.version': 'Versión v1.2.3',
         'settings.about.description': 'Marcadores en orden, libres para moverse.',
         'lang.system': 'Seguir sistema',
         'lang.zhCN': '简体中文',
@@ -200,6 +224,10 @@ const TRANSLATIONS = {
     'fr-FR': {
         'brand.subtitle': 'OrbitMarks · Favoris ordonnés, liberté de navigation.',
         'search.placeholder': 'Recherchez dans vos favoris...',
+        'search.placeholder.global': 'Rechercher dans tous les favoris...',
+        'search.mode.folder': 'Rechercher dans le dossier actuel',
+        'search.mode.global': 'Rechercher dans tous les favoris',
+        'search.no.results': 'Aucun favori trouvé',
         'nav.back': 'Retour',
         'nav.untitled': 'Sans titre',
         'bookmarks.empty': 'Dossier vide',
@@ -210,7 +238,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'À propos',
         'settings.language': 'Langue',
         'settings.language.select': 'Choisir une langue',
-        'settings.about.version': 'Version v1.2.2',
+        'settings.about.version': 'Version v1.2.3',
         'settings.about.description': 'Favoris ordonnés, liberté de navigation.',
         'lang.system': 'Suivre le système',
         'lang.zhCN': '简体中文',
@@ -230,6 +258,10 @@ const TRANSLATIONS = {
     'de-DE': {
         'brand.subtitle': 'OrbitMarks · Lesezeichen geordnet, jederzeit griffbereit.',
         'search.placeholder': 'Lesezeichen durchsuchen...',
+        'search.placeholder.global': 'Alle Lesezeichen durchsuchen...',
+        'search.mode.folder': 'Aktuellen Ordner durchsuchen',
+        'search.mode.global': 'Alle Lesezeichen durchsuchen',
+        'search.no.results': 'Keine Lesezeichen gefunden',
         'nav.back': 'Zurück',
         'nav.untitled': 'Unbenannt',
         'bookmarks.empty': 'Ordner ist leer',
@@ -240,7 +272,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Info',
         'settings.language': 'Sprache',
         'settings.language.select': 'Sprache auswählen',
-        'settings.about.version': 'Version v1.2.2',
+        'settings.about.version': 'Version v1.2.3',
         'settings.about.description': 'Lesezeichen geordnet, jederzeit griffbereit.',
         'lang.system': 'Systemsprache verwenden',
         'lang.zhCN': '简体中文',
@@ -260,6 +292,10 @@ const TRANSLATIONS = {
     'pt-BR': {
         'brand.subtitle': 'OrbitMarks · Favoritos organizados, livres para seguir.',
         'search.placeholder': 'Pesquise nos seus favoritos...',
+        'search.placeholder.global': 'Pesquisar em todos os favoritos...',
+        'search.mode.folder': 'Pesquisar na pasta atual',
+        'search.mode.global': 'Pesquisar em todos os favoritos',
+        'search.no.results': 'Nenhum favorito encontrado',
         'nav.back': 'Voltar',
         'nav.untitled': 'Sem título',
         'bookmarks.empty': 'Pasta vazia',
@@ -270,7 +306,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Sobre',
         'settings.language': 'Idioma',
         'settings.language.select': 'Selecione o idioma',
-        'settings.about.version': 'Versão v1.2.2',
+        'settings.about.version': 'Versão v1.2.3',
         'settings.about.description': 'Favoritos organizados, livres para seguir.',
         'lang.system': 'Seguir sistema',
         'lang.zhCN': '简体中文',
@@ -290,6 +326,10 @@ const TRANSLATIONS = {
     'ru-RU': {
         'brand.subtitle': 'OrbitMarks · Закладки в порядке, свобода передвижения.',
         'search.placeholder': 'Ищите по закладкам...',
+        'search.placeholder.global': 'Искать по всем закладкам...',
+        'search.mode.folder': 'Искать в текущей папке',
+        'search.mode.global': 'Искать по всем закладкам',
+        'search.no.results': 'Закладки не найдены',
         'nav.back': 'Назад',
         'nav.untitled': 'Без названия',
         'bookmarks.empty': 'Папка пуста',
@@ -300,7 +340,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'О приложении',
         'settings.language': 'Язык',
         'settings.language.select': 'Выберите язык',
-        'settings.about.version': 'Версия v1.2.2',
+        'settings.about.version': 'Версия v1.2.3',
         'settings.about.description': 'Закладки в порядке, свобода передвижения.',
         'lang.system': 'Следовать системе',
         'lang.zhCN': '简体中文',
@@ -773,23 +813,240 @@ function renderBookmarkItem(node, container) {
     container.appendChild(item);
 }
 
+// Global search state
+let isGlobalSearchMode = false;
+let searchDebounceTimer = null;
+let pathCache = new Map(); // Cache for folder paths
+
 function setupSearch() {
     const input = document.getElementById('search-input');
-    input.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        const items = document.querySelectorAll('.bookmark-item');
-        items.forEach(item => {
-            const title = item.querySelector('.bookmark-title').textContent.toLowerCase();
-            const url = item.href ? item.href.toLowerCase() : '';
-            // Search both title and URL
-            if (title.includes(query) || url.includes(query)) {
-                item.style.display = 'flex';
-            } else {
-                item.style.display = 'none';
+    const modeToggle = document.getElementById('search-mode-toggle');
+    const folderIcon = document.getElementById('search-mode-icon-folder');
+    const globalIcon = document.getElementById('search-mode-icon-global');
+    const resultsContainer = document.getElementById('global-search-results');
+
+    // Load saved search mode
+    isGlobalSearchMode = localStorage.getItem('orbitmarks_search_mode') === 'global';
+    updateSearchModeUI();
+
+    // Toggle search mode
+    if (modeToggle) {
+        modeToggle.addEventListener('click', () => {
+            isGlobalSearchMode = !isGlobalSearchMode;
+            localStorage.setItem('orbitmarks_search_mode', isGlobalSearchMode ? 'global' : 'folder');
+            updateSearchModeUI();
+            // Re-trigger search if there's a query
+            if (input.value.trim()) {
+                handleSearch(input.value);
             }
         });
+    }
+
+    // Handle search input with debounce
+    input.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+
+        // Clear previous timer
+        if (searchDebounceTimer) {
+            clearTimeout(searchDebounceTimer);
+        }
+
+        // Debounce for global search (300ms)
+        if (isGlobalSearchMode && query) {
+            searchDebounceTimer = setTimeout(() => {
+                handleSearch(query);
+            }, 300);
+        } else {
+            handleSearch(query);
+        }
     });
+
+    // Hide results when clicking outside
+    document.addEventListener('click', (e) => {
+        if (resultsContainer && !e.target.closest('.search-wrapper')) {
+            resultsContainer.classList.remove('visible');
+        }
+    });
+
+    // Close results on Escape key
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            input.value = '';
+            handleSearch('');
+            resultsContainer.classList.remove('visible');
+        }
+    });
+
+    function updateSearchModeUI() {
+        if (folderIcon && globalIcon && modeToggle) {
+            if (isGlobalSearchMode) {
+                folderIcon.style.display = 'none';
+                globalIcon.style.display = 'block';
+                modeToggle.classList.add('global-mode');
+                modeToggle.title = t('search.mode.global', 'Search all bookmarks');
+                input.placeholder = t('search.placeholder.global', 'Search all bookmarks...');
+            } else {
+                folderIcon.style.display = 'block';
+                globalIcon.style.display = 'none';
+                modeToggle.classList.remove('global-mode');
+                modeToggle.title = t('search.mode.folder', 'Search current folder');
+                input.placeholder = t('search.placeholder', 'Search your bookmarks...');
+            }
+        }
+    }
+
+    function handleSearch(query) {
+        const lowerQuery = query.toLowerCase();
+
+        if (isGlobalSearchMode) {
+            // Global search mode
+            if (!query) {
+                resultsContainer.classList.remove('visible');
+                resultsContainer.innerHTML = '';
+                return;
+            }
+            const results = searchAllBookmarks(rootNode, lowerQuery);
+            renderGlobalSearchResults(results.slice(0, 50)); // Limit to 50 results
+        } else {
+            // Folder search mode (original behavior)
+            resultsContainer.classList.remove('visible');
+            const items = document.querySelectorAll('.bookmark-item');
+            items.forEach(item => {
+                const title = item.querySelector('.bookmark-title').textContent.toLowerCase();
+                const url = item.href ? item.href.toLowerCase() : '';
+                if (title.includes(lowerQuery) || url.includes(lowerQuery)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    }
 }
+
+// Recursively search all bookmarks
+function searchAllBookmarks(node, query, results = []) {
+    if (!node) return results;
+
+    // Check if this bookmark matches (only URLs, not folders)
+    if (node.url) {
+        const titleMatch = node.title && node.title.toLowerCase().includes(query);
+        const urlMatch = node.url.toLowerCase().includes(query);
+        if (titleMatch || urlMatch) {
+            results.push({
+                id: node.id,
+                title: node.title,
+                url: node.url,
+                parentId: node.parentId,
+                path: getBookmarkPath(node.parentId)
+            });
+        }
+    }
+
+    // Recursively search children
+    if (node.children) {
+        node.children.forEach(child => searchAllBookmarks(child, query, results));
+    }
+
+    return results;
+}
+
+// Get the folder path for a bookmark
+function getBookmarkPath(parentId) {
+    if (!parentId) return '';
+
+    // Check cache first
+    if (pathCache.has(parentId)) {
+        return pathCache.get(parentId);
+    }
+
+    const pathParts = [];
+    let currentId = parentId;
+
+    while (currentId && currentId !== '0') {
+        const node = findNodeById(rootNode, currentId);
+        if (node && node.title) {
+            pathParts.unshift(node.title);
+        }
+        currentId = node ? node.parentId : null;
+    }
+
+    const path = pathParts.join(' / ');
+    pathCache.set(parentId, path);
+    return path;
+}
+
+// Render global search results dropdown
+function renderGlobalSearchResults(results) {
+    const container = document.getElementById('global-search-results');
+    container.innerHTML = '';
+
+    if (results.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'global-search-empty';
+        empty.textContent = t('search.no.results', 'No bookmarks found');
+        container.appendChild(empty);
+        container.classList.add('visible');
+        return;
+    }
+
+    results.forEach(bookmark => {
+        const item = document.createElement('a');
+        item.className = 'global-search-item';
+        item.href = bookmark.url;
+        item.target = '_blank';
+
+        // Icon
+        const icon = document.createElement('img');
+        icon.className = 'item-icon';
+        try {
+            const domain = new URL(bookmark.url).hostname;
+            icon.src = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+        } catch (e) {
+            icon.src = FALLBACK_ICON_SVG;
+        }
+        icon.onerror = () => icon.src = FALLBACK_ICON_SVG;
+
+        // Info container
+        const info = document.createElement('div');
+        info.className = 'item-info';
+
+        // Title
+        const title = document.createElement('div');
+        title.className = 'item-title';
+        title.textContent = bookmark.title || bookmark.url;
+
+        // Path
+        const path = document.createElement('div');
+        path.className = 'item-path';
+
+        // Folder icon
+        const folderSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        folderSvg.setAttribute('width', '12');
+        folderSvg.setAttribute('height', '12');
+        folderSvg.setAttribute('viewBox', '0 0 24 24');
+        folderSvg.setAttribute('fill', 'none');
+        folderSvg.setAttribute('stroke', 'currentColor');
+        folderSvg.setAttribute('stroke-width', '2');
+        const folderPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        folderPath.setAttribute('d', 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z');
+        folderSvg.appendChild(folderPath);
+
+        path.appendChild(folderSvg);
+        path.appendChild(document.createTextNode(bookmark.path || 'Root'));
+
+        info.appendChild(title);
+        info.appendChild(path);
+
+        item.appendChild(icon);
+        item.appendChild(info);
+
+        container.appendChild(item);
+    });
+
+    container.classList.add('visible');
+}
+
 
 function setupNavigation() {
     const backBtn = document.getElementById('back-btn');

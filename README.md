@@ -11,7 +11,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Manifest-V3-blue" alt="Manifest V3">
   <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License">
-  <img src="https://img.shields.io/badge/Version-1.2.2-orange" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.2.3-orange" alt="Version">
 </p>
 
 ---
@@ -22,7 +22,7 @@ OrbitMarks transforms your messy bookmark collection into a beautifully organize
 
 | Feature | Description |
 |---------|-------------|
-| 🔍 **Live Search** | Instantly filter bookmarks by title or URL within the current folder |
+| 🔍 **Live Search** | Instantly filter bookmarks by title or URL, with global search across all folders |
 | 📁 **Nested Navigation** | Expand/collapse folders in sidebar with persistent state memory |
 | 🌗 **Theme Toggle** | One-click switch between dark and light themes |
 | 🌐 **11 Languages** | Full i18n support with "Follow System" option |
@@ -120,6 +120,12 @@ git clone https://github.com/lyq3/Orbit-Marks.git
 | Русский | `ru-RU` |
 
 ## 📝 Changelog
+
+### v1.2.3
+- 🌐 **Global Search**: Added search mode toggle to search across all bookmarks
+- 📍 Path display in global search results showing folder hierarchy
+- ⏱️ Search debounce (300ms) for performance optimization
+- 🔄 Search mode preference persists in localStorage
 
 ### v1.2.2
 - 🔒 Security: Replaced innerHTML with DOM API to prevent XSS vulnerabilities
