@@ -216,6 +216,14 @@ body {
     opacity: 1;
 }
 
+.nav-toggle svg {
+    transition: transform 0.2s ease;
+}
+
+.nav-toggle.expanded svg {
+    transform: rotate(90deg);
+}
+
 /* Content (Icon + Text) */
 .nav-content {
     display: flex;

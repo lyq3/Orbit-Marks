@@ -21,7 +21,7 @@ const TRANSLATIONS = {
         'brand.subtitle': 'OrbitMarks · Bookmarks in order, free to roam.',
         'search.placeholder': 'Search your bookmarks...',
         'nav.back': 'Back',
-        'nav.bookmarks': 'Bookmarks Bar',
+        'nav.untitled': 'Untitled',
         'bookmarks.empty': 'Empty Directory',
         'bookmark.type.folder': 'Folder',
         'settings.title': 'Settings',
@@ -51,7 +51,7 @@ const TRANSLATIONS = {
         'brand.subtitle': 'OrbitMarks · 书签有序，自由随行。',
         'search.placeholder': '搜索书签...',
         'nav.back': '返回',
-        'nav.bookmarks': '书签栏',
+        'nav.untitled': '未命名',
         'bookmarks.empty': '空文件夹',
         'bookmark.type.folder': '文件夹',
         'settings.title': '设置',
@@ -81,7 +81,7 @@ const TRANSLATIONS = {
         'brand.subtitle': 'OrbitMarks · 書籤有序，自由隨行。',
         'search.placeholder': '搜尋書籤...',
         'nav.back': '返回',
-        'nav.bookmarks': '書籤列',
+        'nav.untitled': '未命名',
         'bookmarks.empty': '空資料夾',
         'bookmark.type.folder': '資料夾',
         'settings.title': '設定',
@@ -111,7 +111,7 @@ const TRANSLATIONS = {
         'brand.subtitle': 'OrbitMarks · ブックマークを整え、自由に巡航。',
         'search.placeholder': 'ブックマークを検索...',
         'nav.back': '戻る',
-        'nav.bookmarks': 'ブックマークバー',
+        'nav.untitled': '無題',
         'bookmarks.empty': 'フォルダーは空です',
         'bookmark.type.folder': 'フォルダー',
         'settings.title': '設定',
@@ -141,7 +141,7 @@ const TRANSLATIONS = {
         'brand.subtitle': 'OrbitMarks · 북마크를 정돈하고 자유롭게 순항하세요.',
         'search.placeholder': '북마크 검색...',
         'nav.back': '뒤로',
-        'nav.bookmarks': '북마크 바',
+        'nav.untitled': '제목 없음',
         'bookmarks.empty': '비어 있는 폴더',
         'bookmark.type.folder': '폴더',
         'settings.title': '설정',
@@ -171,7 +171,7 @@ const TRANSLATIONS = {
         'brand.subtitle': 'OrbitMarks · Marcadores en orden, libres para moverse.',
         'search.placeholder': 'Busca en tus marcadores...',
         'nav.back': 'Volver',
-        'nav.bookmarks': 'Barra de marcadores',
+        'nav.untitled': 'Sin título',
         'bookmarks.empty': 'Carpeta vacía',
         'bookmark.type.folder': 'Carpeta',
         'settings.title': 'Configuración',
@@ -201,7 +201,7 @@ const TRANSLATIONS = {
         'brand.subtitle': 'OrbitMarks · Favoris ordonnés, liberté de navigation.',
         'search.placeholder': 'Recherchez dans vos favoris...',
         'nav.back': 'Retour',
-        'nav.bookmarks': 'Barre de favoris',
+        'nav.untitled': 'Sans titre',
         'bookmarks.empty': 'Dossier vide',
         'bookmark.type.folder': 'Dossier',
         'settings.title': 'Paramètres',
@@ -231,7 +231,7 @@ const TRANSLATIONS = {
         'brand.subtitle': 'OrbitMarks · Lesezeichen geordnet, jederzeit griffbereit.',
         'search.placeholder': 'Lesezeichen durchsuchen...',
         'nav.back': 'Zurück',
-        'nav.bookmarks': 'Lesezeichenleiste',
+        'nav.untitled': 'Unbenannt',
         'bookmarks.empty': 'Ordner ist leer',
         'bookmark.type.folder': 'Ordner',
         'settings.title': 'Einstellungen',
@@ -261,7 +261,7 @@ const TRANSLATIONS = {
         'brand.subtitle': 'OrbitMarks · Favoritos organizados, livres para seguir.',
         'search.placeholder': 'Pesquise nos seus favoritos...',
         'nav.back': 'Voltar',
-        'nav.bookmarks': 'Barra de favoritos',
+        'nav.untitled': 'Sem título',
         'bookmarks.empty': 'Pasta vazia',
         'bookmark.type.folder': 'Pasta',
         'settings.title': 'Configurações',
@@ -291,7 +291,7 @@ const TRANSLATIONS = {
         'brand.subtitle': 'OrbitMarks · Закладки в порядке, свобода передвижения.',
         'search.placeholder': 'Ищите по закладкам...',
         'nav.back': 'Назад',
-        'nav.bookmarks': 'Панель закладок',
+        'nav.untitled': 'Без названия',
         'bookmarks.empty': 'Папка пуста',
         'bookmark.type.folder': 'Папка',
         'settings.title': 'Настройки',
@@ -555,8 +555,9 @@ function renderSidebarNode(node, container, depth) {
     if (!isFolder) return;
 
     const hasChildrenFolders = node.children && node.children.some(child => !child.url);
-    const rawLabel = node.title || 'Untitled';
-    const displayLabel = (node.id === '1' && rawLabel === 'Bookmarks Bar') ? t('nav.bookmarks', rawLabel) : rawLabel;
+    // Chrome automatically localizes root folder names (书签栏, 其他书签, etc.)
+    // so we just use the title as-is
+    const displayLabel = node.title || t('nav.untitled', 'Untitled');
 
     // Wrapper for the item line
     const wrapper = document.createElement('div');
@@ -593,11 +594,32 @@ function renderSidebarNode(node, container, depth) {
     // First letter for collapsed state
     const firstChar = displayLabel && displayLabel.length > 0 ? displayLabel.charAt(0).toUpperCase() : '?';
 
-    content.innerHTML = `
-        <svg class="nav-item-icon" style="width:16px; height:16px; opacity:0.8;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
-        <span class="nav-thumbnail">${firstChar}</span>
-        <span class="nav-text" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${displayLabel}</span>
-    `;
+    // Create elements safely to prevent XSS
+    const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    iconSvg.setAttribute('class', 'nav-item-icon');
+    iconSvg.setAttribute('style', 'width:16px; height:16px; opacity:0.8;');
+    iconSvg.setAttribute('fill', 'none');
+    iconSvg.setAttribute('stroke', 'currentColor');
+    iconSvg.setAttribute('viewBox', '0 0 24 24');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('stroke-width', '2');
+    path.setAttribute('d', 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z');
+    iconSvg.appendChild(path);
+
+    const thumbnail = document.createElement('span');
+    thumbnail.className = 'nav-thumbnail';
+    thumbnail.textContent = firstChar;
+
+    const navText = document.createElement('span');
+    navText.className = 'nav-text';
+    navText.style.cssText = 'white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
+    navText.textContent = displayLabel;
+
+    content.appendChild(iconSvg);
+    content.appendChild(thumbnail);
+    content.appendChild(navText);
 
     wrapper.addEventListener('click', () => {
         currentFolderId = node.id;
@@ -649,7 +671,11 @@ function renderFolder(folderNode) {
 
     const title = document.createElement('h2');
     title.className = 'folder-title';
-    title.innerHTML = `<span style="opacity:0.6; margin-right:8px;">/</span>${folderNode.title}`;
+    const slash = document.createElement('span');
+    slash.style.cssText = 'opacity:0.6; margin-right:8px;';
+    slash.textContent = '/';
+    title.appendChild(slash);
+    title.appendChild(document.createTextNode(folderNode.title));
     container.appendChild(title);
 
     const grid = document.createElement('div');
@@ -700,6 +726,9 @@ function renderBookmarkItem(node, container) {
             if (node.parentId) {
                 navigationStack.push(node.parentId);
             }
+            // Update currentFolderId and re-render sidebar to sync highlight
+            currentFolderId = node.id;
+            renderSidebar();
             renderFolder(node);
         });
     }
@@ -772,6 +801,9 @@ function setupNavigation() {
                 const parentNode = findNodeById(rootNode, parentId);
                 // We might be navigating back to a sidebar root, which is fine.
                 if (parentNode) {
+                    // Update currentFolderId and re-render sidebar to sync highlight
+                    currentFolderId = parentNode.id;
+                    renderSidebar();
                     renderFolder(parentNode);
                 }
             }
@@ -797,7 +829,7 @@ function setupSettings() {
 
     if (settingsBtn && overlay) {
         settingsBtn.addEventListener('click', () => {
-            const savedLang = localStorage.getItem('nestlink_language') || 'system';
+            const savedLang = localStorage.getItem('orbitmarks_language') || 'system';
             const select = document.getElementById('language-select');
             if (select) {
                 select.value = savedLang;
