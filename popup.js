@@ -50,7 +50,10 @@ const TRANSLATIONS = {
         'lang.ruRU': 'Русский',
         'settings.feedback.title': 'We value your feedback!',
         'settings.feedback.subtitle': 'Thank you for using OrbitMarks! Share your thoughts below or email us at <a href="mailto:support@btman.net">support@btman.net</a>.',
-        'settings.feedback.cta': 'Questions or ideas? Drop us a line at support@btman.net.'
+        'settings.feedback.cta': 'Questions or ideas? Drop us a line at support@btman.net.',
+        'search.engine.switch': 'Switch search engine',
+        'search.engine.google': 'Google',
+        'search.engine.baidu': 'Baidu'
     },
     'zh-CN': {
         'brand.subtitle': 'OrbitMarks · 书签有序，自由随行。',
@@ -84,7 +87,10 @@ const TRANSLATIONS = {
         'lang.ruRU': 'Русский',
         'settings.feedback.title': '我们重视你的反馈！',
         'settings.feedback.subtitle': '感谢使用 OrbitMarks！欢迎在下方分享你的想法，或直接发送邮件至 <a href="mailto:support@btman.net">support@btman.net</a>。',
-        'settings.feedback.cta': '有任何想法，欢迎发送邮件至 support@btman.net。'
+        'settings.feedback.cta': '有任何想法，欢迎发送邮件至 support@btman.net。',
+        'search.engine.switch': '切换搜索引擎',
+        'search.engine.google': '谷歌',
+        'search.engine.baidu': '百度'
     },
     'zh-TW': {
         'brand.subtitle': 'OrbitMarks · 書籤有序，自由隨行。',
@@ -118,7 +124,10 @@ const TRANSLATIONS = {
         'lang.ruRU': 'Русский',
         'settings.feedback.title': '我們重視你的回饋！',
         'settings.feedback.subtitle': '感謝使用 OrbitMarks！歡迎在下方分享想法，或寄信至 <a href="mailto:support@btman.net">support@btman.net</a>。',
-        'settings.feedback.cta': '有任何點子，都可以寫信到 support@btman.net。'
+        'settings.feedback.cta': '有任何點子，都可以寫信到 support@btman.net。',
+        'search.engine.switch': '切換搜尋引擎',
+        'search.engine.google': 'Google',
+        'search.engine.baidu': '百度'
     },
     'ja-JP': {
         'brand.subtitle': 'OrbitMarks · ブックマークを整え、自由に巡航。',
@@ -152,7 +161,10 @@ const TRANSLATIONS = {
         'lang.ruRU': 'Русский',
         'settings.feedback.title': 'フィードバックをお待ちしています！',
         'settings.feedback.subtitle': 'OrbitMarks をご利用いただきありがとうございます。フォーム、または <a href="mailto:support@btman.net">support@btman.net</a> までお気軽にご連絡ください。',
-        'settings.feedback.cta': 'お気軽に support@btman.net へご連絡ください。'
+        'settings.feedback.cta': 'お気軽に support@btman.net へご連絡ください。',
+        'search.engine.switch': '検索エンジンを切り替え',
+        'search.engine.google': 'Google',
+        'search.engine.baidu': 'Baidu'
     },
     'ko-KR': {
         'brand.subtitle': 'OrbitMarks · 북마크를 정돈하고 자유롭게 순항하세요.',
@@ -186,7 +198,10 @@ const TRANSLATIONS = {
         'lang.ruRU': 'Русский',
         'settings.feedback.title': '피드백을 들려주세요!',
         'settings.feedback.subtitle': 'OrbitMarks를 사용해 주셔서 감사합니다. 아래에 의견을 남기거나 <a href="mailto:support@btman.net">support@btman.net</a> 으로 메일을 보내 주세요.',
-        'settings.feedback.cta': '아이디어가 있다면 support@btman.net 으로 보내 주세요.'
+        'settings.feedback.cta': '아이디어가 있다면 support@btman.net 으로 보내 주세요.',
+        'search.engine.switch': '검색 엔진 전환',
+        'search.engine.google': 'Google',
+        'search.engine.baidu': 'Baidu'
     },
     'es-ES': {
         'brand.subtitle': 'OrbitMarks · Marcadores en orden, libres para moverse.',
@@ -220,7 +235,10 @@ const TRANSLATIONS = {
         'lang.ruRU': 'Русский',
         'settings.feedback.title': '¡Tu opinión es importante!',
         'settings.feedback.subtitle': 'Gracias por usar OrbitMarks. Comparte tus ideas abajo o escríbenos a <a href="mailto:support@btman.net">support@btman.net</a>.',
-        'settings.feedback.cta': '¿Tienes ideas? Escríbenos a support@btman.net.'
+        'settings.feedback.cta': '¿Tienes ideas? Escríbenos a support@btman.net.',
+        'search.engine.switch': 'Cambiar motor de búsqueda',
+        'search.engine.google': 'Google',
+        'search.engine.baidu': 'Baidu'
     },
     'fr-FR': {
         'brand.subtitle': 'OrbitMarks · Favoris ordonnés, liberté de navigation.',
@@ -254,7 +272,10 @@ const TRANSLATIONS = {
         'lang.ruRU': 'Русский',
         'settings.feedback.title': 'Vos retours comptent !',
         'settings.feedback.subtitle': 'Merci d’utiliser OrbitMarks. Partagez vos idées ci-dessous ou écrivez-nous à <a href="mailto:support@btman.net">support@btman.net</a>.',
-        'settings.feedback.cta': 'Une idée ? Écrivez-nous à support@btman.net.'
+        'settings.feedback.cta': 'Une idée ? Écrivez-nous à support@btman.net.',
+        'search.engine.switch': 'Changer de moteur de recherche',
+        'search.engine.google': 'Google',
+        'search.engine.baidu': 'Baidu'
     },
     'de-DE': {
         'brand.subtitle': 'OrbitMarks · Lesezeichen geordnet, jederzeit griffbereit.',
@@ -288,7 +309,10 @@ const TRANSLATIONS = {
         'lang.ruRU': 'Русский',
         'settings.feedback.title': 'Wir freuen uns über Feedback!',
         'settings.feedback.subtitle': 'Danke, dass du OrbitMarks nutzt. Teile deine Gedanken hier oder schreibe uns an <a href="mailto:support@btman.net">support@btman.net</a>.',
-        'settings.feedback.cta': 'Hast du Ideen? Schreib uns an support@btman.net.'
+        'settings.feedback.cta': 'Hast du Ideen? Schreib uns an support@btman.net.',
+        'search.engine.switch': 'Suchmaschine wechseln',
+        'search.engine.google': 'Google',
+        'search.engine.baidu': 'Baidu'
     },
     'pt-BR': {
         'brand.subtitle': 'OrbitMarks · Favoritos organizados, livres para seguir.',
@@ -322,7 +346,10 @@ const TRANSLATIONS = {
         'lang.ruRU': 'Русский',
         'settings.feedback.title': 'A sua opinião importa!',
         'settings.feedback.subtitle': 'Obrigado por usar o OrbitMarks. Compartilhe suas ideias abaixo ou envie um e-mail para <a href="mailto:support@btman.net">support@btman.net</a>.',
-        'settings.feedback.cta': 'Tem alguma ideia? Fale com a gente em support@btman.net.'
+        'settings.feedback.cta': 'Tem alguma ideia? Fale com a gente em support@btman.net.',
+        'search.engine.switch': 'Mudar mecanismo de busca',
+        'search.engine.google': 'Google',
+        'search.engine.baidu': 'Baidu'
     },
     'ru-RU': {
         'brand.subtitle': 'OrbitMarks · Закладки в порядке, свобода передвижения.',
@@ -356,7 +383,10 @@ const TRANSLATIONS = {
         'lang.ruRU': 'Русский',
         'settings.feedback.title': 'Нам важна ваша обратная связь!',
         'settings.feedback.subtitle': 'Спасибо, что пользуетесь OrbitMarks. Поделитесь мнением ниже или напишите на <a href="mailto:support@btman.net">support@btman.net</a>.',
-        'settings.feedback.cta': 'Есть идеи? Напишите на support@btman.net.'
+        'settings.feedback.cta': 'Есть идеи? Напишите на support@btman.net.',
+        'search.engine.switch': 'Сменить поисковик',
+        'search.engine.google': 'Google',
+        'search.engine.baidu': 'Baidu'
     }
 };
 
@@ -401,6 +431,13 @@ function updateLanguage(langPref) {
         const key = el.dataset.i18nPlaceholder;
         if (dictionary[key]) {
             el.placeholder = dictionary[key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+        const key = el.dataset.i18nTitle;
+        if (dictionary[key]) {
+            el.title = dictionary[key];
         }
     });
 
