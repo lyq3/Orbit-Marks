@@ -35,7 +35,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'About',
         'settings.language': 'Language',
         'settings.language.select': 'Select Language',
-        'settings.about.version': 'v1.2.6',
+        'settings.about.version': 'v1.2.7',
         'settings.about.description': 'Bookmarks in order, free to roam.',
         'lang.system': 'Follow System',
         'lang.zhCN': '简体中文',
@@ -69,7 +69,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '关于',
         'settings.language': '语言',
         'settings.language.select': '选择语言',
-        'settings.about.version': '版本 v1.2.6',
+        'settings.about.version': '版本 v1.2.7',
         'settings.about.description': '书签有序，自由随行。',
         'lang.system': '跟随系统',
         'lang.zhCN': '简体中文',
@@ -103,7 +103,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '關於',
         'settings.language': '語言',
         'settings.language.select': '選擇語言',
-        'settings.about.version': '版本 v1.2.6',
+        'settings.about.version': '版本 v1.2.7',
         'settings.about.description': '書籤有序，自由隨行。',
         'lang.system': '跟隨系統',
         'lang.zhCN': '简体中文',
@@ -137,7 +137,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '情報',
         'settings.language': '言語',
         'settings.language.select': '言語を選択',
-        'settings.about.version': 'バージョン v1.2.6',
+        'settings.about.version': 'バージョン v1.2.7',
         'settings.about.description': 'ブックマークを整えて、自由に巡航。',
         'lang.system': 'システムに従う',
         'lang.zhCN': '简体中文',
@@ -171,7 +171,7 @@ const TRANSLATIONS = {
         'settings.nav.about': '정보',
         'settings.language': '언어',
         'settings.language.select': '언어 선택',
-        'settings.about.version': '버전 v1.2.6',
+        'settings.about.version': '버전 v1.2.7',
         'settings.about.description': '북마크를 정돈하고 자유롭게 순항하세요.',
         'lang.system': '시스템과 동일',
         'lang.zhCN': '简体中文',
@@ -205,7 +205,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Acerca de',
         'settings.language': 'Idioma',
         'settings.language.select': 'Seleccionar idioma',
-        'settings.about.version': 'Versión v1.2.6',
+        'settings.about.version': 'Versión v1.2.7',
         'settings.about.description': 'Marcadores en orden, libres para moverse.',
         'lang.system': 'Seguir sistema',
         'lang.zhCN': '简体中文',
@@ -239,7 +239,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'À propos',
         'settings.language': 'Langue',
         'settings.language.select': 'Choisir une langue',
-        'settings.about.version': 'Version v1.2.6',
+        'settings.about.version': 'Version v1.2.7',
         'settings.about.description': 'Favoris ordonnés, liberté de navigation.',
         'lang.system': 'Suivre le système',
         'lang.zhCN': '简体中文',
@@ -273,7 +273,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Info',
         'settings.language': 'Sprache',
         'settings.language.select': 'Sprache auswählen',
-        'settings.about.version': 'Version v1.2.6',
+        'settings.about.version': 'Version v1.2.7',
         'settings.about.description': 'Lesezeichen geordnet, jederzeit griffbereit.',
         'lang.system': 'Systemsprache verwenden',
         'lang.zhCN': '简体中文',
@@ -307,7 +307,7 @@ const TRANSLATIONS = {
         'settings.nav.about': 'Sobre',
         'settings.language': 'Idioma',
         'settings.language.select': 'Selecione o idioma',
-        'settings.about.version': 'Versão v1.2.6',
+        'settings.about.version': 'Versão v1.2.7',
         'settings.about.description': 'Favoritos organizados, livres para seguir.',
         'lang.system': 'Seguir sistema',
         'lang.zhCN': '简体中文',
@@ -930,6 +930,81 @@ function setupSearch() {
                 }
             });
         }
+    }
+
+    // Search Engine Feature
+    setupSearchEngine(input);
+}
+
+// Search Engine Configuration
+const SEARCH_ENGINES = {
+    google: { name: 'Google', url: 'https://www.google.com/search?q=', icon: 'icons/google.svg' },
+    baidu: { name: '百度', url: 'https://www.baidu.com/s?wd=', icon: 'icons/baidu.svg' }
+};
+
+let currentSearchEngine = localStorage.getItem('orbitmarks_search_engine') || 'google';
+
+function setupSearchEngine(searchInput) {
+    const engineToggle = document.getElementById('engine-toggle');
+    const engineIcon = document.getElementById('engine-icon');
+    const engineDropdown = document.getElementById('engine-dropdown');
+    const engineOptions = document.querySelectorAll('.engine-option');
+
+    if (!engineToggle || !engineDropdown) return;
+
+    // Set initial engine
+    updateEngineUI();
+
+    // Toggle dropdown
+    engineToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        engineToggle.classList.toggle('open');
+        engineDropdown.classList.toggle('visible');
+    });
+
+    // Select engine
+    engineOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const engine = option.dataset.engine;
+            currentSearchEngine = engine;
+            localStorage.setItem('orbitmarks_search_engine', engine);
+            updateEngineUI();
+            engineDropdown.classList.remove('visible');
+            engineToggle.classList.remove('open');
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+        engineDropdown.classList.remove('visible');
+        engineToggle.classList.remove('open');
+    });
+
+    // Handle Enter key for search engine
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && searchInput.value.trim()) {
+            const query = encodeURIComponent(searchInput.value.trim());
+            const engine = SEARCH_ENGINES[currentSearchEngine];
+            window.open(engine.url + query, '_blank');
+            e.preventDefault();
+        }
+    });
+
+    function updateEngineUI() {
+        const engine = SEARCH_ENGINES[currentSearchEngine];
+        if (engineIcon) {
+            engineIcon.src = engine.icon;
+            engineIcon.alt = engine.name;
+        }
+        // Update active state in dropdown
+        engineOptions.forEach(opt => {
+            if (opt.dataset.engine === currentSearchEngine) {
+                opt.classList.add('active');
+            } else {
+                opt.classList.remove('active');
+            }
+        });
     }
 }
 
