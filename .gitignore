@@ -50,3 +50,6 @@ Thumbs.db
 *.zip
 *.tar
 *.tgz
+
+# Gemini
+GEMINI.md
